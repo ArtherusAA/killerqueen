@@ -22,7 +22,7 @@ class GameDB:
             return False
 
     def get_players(self, game):
-        self.cursor.execute('SELECT players FROM games WHERE game = ' + object)
+        self.cursor.execute('SELECT players FROM games WHERE game = ' + game)
         result = self.cursor.fetchall()
         self.cursor = None
         return result
@@ -34,5 +34,5 @@ class GameDB:
         return result
 
     '''def join_game(self, game, player):
-        players = get_players(geme)
-        self.cursor.execute('UPDATE games SET ')'''
+        players = get_players(game)
+        self.cursor.execute('UPDATE games SET players = 'players' WHERE game = ' + game)'''
