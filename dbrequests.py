@@ -20,3 +20,19 @@ class GameDB:
             return True
         except ValueError:
             return False
+
+    def get_players(self, game):
+        self.cursor.execute('SELECT players FROM games WHERE game = ' + object)
+        result = self.cursor.fetchall()
+        self.cursor = None
+        return result
+
+    def get_game(self, user):
+        self.cursor.execute('SELECT game FROM users WHERE user = ' + user)
+        result = self.cursor.fetchall()
+        self.cursor = None
+        return result
+
+    '''def join_game(self, game, player):
+        players = get_players(geme)
+        self.cursor.execute('UPDATE games SET ')'''
