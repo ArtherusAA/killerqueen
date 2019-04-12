@@ -22,8 +22,9 @@ class GameDB:
             return False
 
     def get_players(self, game):
-        self.cursor.execute('SELECT players FROM games WHERE game = ' + game)
+        self.cursor.execute('SELECT * FROM users WHERE game = ' + game)
         result = self.cursor.fetchall()
+        result = result['user']
         self.cursor = None
         return result
 
@@ -33,6 +34,6 @@ class GameDB:
         self.cursor = None
         return result
 
-    '''def join_game(self, game, player):
-        players = get_players(game)
-        self.cursor.execute('UPDATE games SET players = 'players' WHERE game = ' + game)'''
+    def join_game(self, game, player):
+        self.cursor.execute('INSERT INTO users (user, game) values (' + player + ',' + game + ')')
+        self.connection.commit()
