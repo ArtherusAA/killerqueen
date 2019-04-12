@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class GameDB:
 
     def __init__(self):
@@ -25,15 +26,31 @@ class GameDB:
         self.cursor.execute('SELECT * FROM users WHERE game = ' + game)
         result = self.cursor.fetchall()
         result = result['user']
-        self.cursor = None
         return result
 
     def get_game(self, user):
         self.cursor.execute('SELECT game FROM users WHERE user = ' + user)
         result = self.cursor.fetchall()
-        self.cursor = None
         return result
 
-    def join_game(self, game, player):
-        self.cursor.execute('INSERT INTO users (user, game) values (' + player + ',' + game + ')')
+    def join_game(self, game, player, target, player_id):
+        self.cursor.execute('INSERT INTO users (user, game) values (' + player + ',' + game + ',' + target + ','
+                            + palyer_id + ')')
         self.connection.commit()
+
+    def create_game(self, game):
+        self.cursor.execute('INSERT INTO games (game) values (' + game + ')')
+        self.connection.commit()
+
+    def remove_player_from_game(self, game, user):
+        self.cursor.execute('UPDATE users SET game=' + 'None' + ' WHERE user=' + user)
+        self.connection.commit()
+
+    def set_target_to_user(self, user, target):
+        self.cursor.execute('UPDATE users SET target=' + target + ' WHERE user=' + user)
+        self.connection.commit()
+
+    def get_user_target(self, user):
+        self.cursor.execute('SELECT target FROM users WHERE user = ' + user)
+        result = self.cursor.fetchall()
+        return result
