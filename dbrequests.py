@@ -27,7 +27,7 @@ class GameDB:
         result = self.cursor.fetchall()
         users = []
         for i in result:
-            user.append(i['user'])
+            users.append(i['user'])
         return users
 
     def get_game(self, user):
