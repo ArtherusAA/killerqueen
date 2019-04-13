@@ -25,8 +25,10 @@ class GameDB:
     def get_players(self, game):
         self.cursor.execute('SELECT * FROM users WHERE game = ' + game)
         result = self.cursor.fetchall()
-        result = result['user']
-        return result
+        users = []
+        for i in result:
+            user.append(i['user'])
+        return users
 
     def get_game(self, user):
         self.cursor.execute('SELECT game FROM users WHERE user = ' + user)
