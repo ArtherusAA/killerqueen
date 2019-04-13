@@ -35,7 +35,7 @@ class GameDB:
 
     def join_game(self, game, player, target, player_id):
         self.cursor.execute('INSERT INTO users (user, game) values (' + player + ',' + game + ',' + target + ','
-                            + palyer_id + ')')
+                            + player_id + ')')
         self.connection.commit()
 
     def create_game(self, game):
