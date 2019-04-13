@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+def bot_request(request):
+    if request.method == 'POST':
+        pass
