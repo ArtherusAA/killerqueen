@@ -1,9 +1,10 @@
-import sqlite3
+import requests
 
+url = 'http://127.0.0.1:8000/bot_request/'
 
 class GameDB:
 
-    def __init__(self):
+    '''def __init__(self):
         self.connection = None
         self.cursor = None
 
@@ -20,39 +21,65 @@ class GameDB:
             self.connection.close()
             return True
         except ValueError:
-            return False
+            return False'''
 
     def get_players(self, game):
-        self.cursor.execute('SELECT * FROM users WHERE game = ' + game)
-        result = self.cursor.fetchall()
-        users = []
-        for i in result:
-            users.append(i['user'])
+        params = {
+            'action': 'get_players',
+            'game': game,
+        }
+        users = requests.post(url, params).data
         return users
 
     def get_game(self, user):
-        self.cursor.execute('SELECT game FROM users WHERE user = ' + user)
-        result = self.cursor.fetchall()
-        return result
+        params = {
+            'action': 'get_game',
+            'user': user,
+        }
+        game = requests.post(url, params).data
+        return game
 
-    def join_game(self, game, player, target, player_id):
-        self.cursor.execute('INSERT INTO users (user, game) values (' + player + ',' + game + ',' + target + ','
-                            + player_id + ')')
-        self.connection.commit()
+    def join_game(self, user, game, target, user_identifier, condition, nickname):
+        params = {
+            'action': 'join_game',
+            'user': user,
+            'game': game,
+            'target': target,
+            'user_identifier': user_identifier,
+            'condition': condition,
+            'nickname': nickname,
+        }
+        return requests.post(url, params).data
 
-    def create_game(self, game):
-        self.cursor.execute('INSERT INTO games (game) values (' + game + ')')
-        self.connection.commit()
+    def create_game(self, game, condition, winner = None):
+        params = {
+            'action': 'create_game',
+            'game': game,
+            'condition': condition,
+            'winner': winner,
+        }
+        return requests.post(url, params).data
 
     def remove_player_from_game(self, game, user):
-        self.cursor.execute('UPDATE users SET game=' + 'None' + ' WHERE user=' + user)
-        self.connection.commit()
+        params = {
+            'action': 'remove_player_from_game',
+            'game': game,
+            'user': user,
+        }
+        return requests.post(url, params).data
 
     def set_target_to_user(self, user, target):
-        self.cursor.execute('UPDATE users SET target=' + target + ' WHERE user=' + user)
-        self.connection.commit()
+        params = {
+            'action': 'set_target_to_user',
+            'user': user,
+            'target': target,
+        }
+        return requests.post(url, params).data
 
     def get_user_target(self, user):
-        self.cursor.execute('SELECT target FROM users WHERE user = ' + user)
-        result = self.cursor.fetchall()
-        return result
+        params = {
+            'action': 'get_user_target',
+            'user': user,
+        }
+        target = requests.post(url, params).data
+        return target
