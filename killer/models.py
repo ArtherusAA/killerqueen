@@ -3,7 +3,7 @@ from django.db import models
 
 class GameModel(models.Model):
     game = models.CharField()
-    condition = models.IntegerField()
+    condition = models.CharField()
     winner = models.CharField()
 
 
