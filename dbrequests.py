@@ -1,85 +1,77 @@
+import json
 import requests
+
 
 url = 'http://127.0.0.1:8000/bot_request/'
 
-class GameDB:
 
-    '''def __init__(self):
-        self.connection = None
-        self.cursor = None
+def get_players(game):
+    params = {
+        'action': 'get_players',
+        'game': game,
+    }
+    users = json.loads(requests.post(url, params))
+    if users['error'] == 'ok':
+        players = []
+        for key in users.keys():
+            if key[:4] == 'user':
+                players.append(users[key])
+        return players
+    return users['error']
 
-    def establish_connection(self, db_file):
-        try:
-            self.connection = sqlite3.connect(db_file)
-            self.cursor = self.connection.cursor()
-            return True
-        except ValueError:
-            return False
+def get_game(user):
+    params = {
+        'action': 'get_game',
+        'user': user,
+    }
+    game = json.loads(requests.post(url, params))
+    if game['error'] == 'ok':
+        return game['game']
+    return game['error']
 
-    def close_connection(self):
-        try:
-            self.connection.close()
-            return True
-        except ValueError:
-            return False'''
+def join_game(user, game, target, user_identifier, condition, nickname):
+    params = {
+        'action': 'join_game',
+        'user': user,
+        'game': game,
+        'target': target,
+        'user_identifier': user_identifier,
+        'condition': condition,
+        'nickname': nickname,
+    }
+    response = requests.post(url, params)
 
-    def get_players(self, game):
-        params = {
-            'action': 'get_players',
-            'game': game,
-        }
-        users = requests.post(url, params).data
-        return users
+def create_game(game, condition, winner=None):
+    params = {
+        'action': 'create_game',
+        'game': game,
+        'condition': condition,
+        'winner': winner,
+    }
+    response = requests.post(url, params)
 
-    def get_game(self, user):
-        params = {
-            'action': 'get_game',
-            'user': user,
-        }
-        game = requests.post(url, params).data
-        return game
+def remove_player_from_game(game, user):
+    params = {
+        'action': 'remove_player_from_game',
+        'game': game,
+        'user': user,
+    }
+    response = requests.post(url, params)
 
-    def join_game(self, user, game, target, user_identifier, condition, nickname):
-        params = {
-            'action': 'join_game',
-            'user': user,
-            'game': game,
-            'target': target,
-            'user_identifier': user_identifier,
-            'condition': condition,
-            'nickname': nickname,
-        }
-        return requests.post(url, params).data
+def set_target_to_user(user, target):
+    params = {
+        'action': 'set_target_to_user',
+        'user': user,
+        'target': target,
+    }
+    response = requests.post(url, params)
 
-    def create_game(self, game, condition, winner = None):
-        params = {
-            'action': 'create_game',
-            'game': game,
-            'condition': condition,
-            'winner': winner,
-        }
-        return requests.post(url, params).data
-
-    def remove_player_from_game(self, game, user):
-        params = {
-            'action': 'remove_player_from_game',
-            'game': game,
-            'user': user,
-        }
-        return requests.post(url, params).data
-
-    def set_target_to_user(self, user, target):
-        params = {
-            'action': 'set_target_to_user',
-            'user': user,
-            'target': target,
-        }
-        return requests.post(url, params).data
-
-    def get_user_target(self, user):
-        params = {
-            'action': 'get_user_target',
-            'user': user,
-        }
-        target = requests.post(url, params).data
-        return target
+def get_user_target(user):
+    params = {
+        'action': 'get_user_target',
+        'user': user,
+    }
+    target = json.loads(requests.post(url, params))
+    if target['error'] == 'ok':
+        return target['target']
+    return target['error']
