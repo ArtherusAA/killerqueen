@@ -7,12 +7,12 @@ def add_user(name):
     user.save(using='ScoreBoard')
 
 
-def set_kills(name):
-    user = User(name=name, kills=0, wins=0)
+def set_kills(name, kills):
+    user = User(name=name, kills=kills, wins=0)
     user.save(using='ScoreBoard')
 
 
-def set_wins(name):
-    user = User(name=name, kills=0, wins=0)
+def set_wins(name, wins):
+    user = User(name=name, kills=0, wins=wins)
     user.save(using='ScoreBoard')
 
