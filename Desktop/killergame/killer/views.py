@@ -6,9 +6,11 @@ import squilt3
 conn = sqlite3.connect("killer.DataBaseControl.db")
 cursor = conn.cursor()
 
+
 def add_user(name):
     cursor.execute("""INSERT INTO players VALUES(name, kills, wins)""", (name, '0', '0'))
     cursor.commit()
+
 
 def set_kills(name, kills):
     sql = "SELECT * FROM players WHERE player =?"
