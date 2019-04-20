@@ -40,6 +40,7 @@ def join_game(user, game, target, user_identifier, condition, nickname):
         'nickname': nickname,
     }
     response = requests.post(url, params)
+    return response.status_code
 
 def create_game(game, condition, winner=None):
     params = {
@@ -49,6 +50,7 @@ def create_game(game, condition, winner=None):
         'winner': winner,
     }
     response = requests.post(url, params)
+    return response.status_code
 
 def remove_player_from_game(game, user):
     params = {
@@ -57,6 +59,7 @@ def remove_player_from_game(game, user):
         'user': user,
     }
     response = requests.post(url, params)
+    return response.status_code
 
 def set_target_to_user(user, target):
     params = {
@@ -65,6 +68,7 @@ def set_target_to_user(user, target):
         'target': target,
     }
     response = requests.post(url, params)
+    return response.status_code
 
 def get_user_target(user):
     params = {
