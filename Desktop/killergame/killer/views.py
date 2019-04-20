@@ -1,4 +1,4 @@
-rom django.shortcuts import render
+from django.shortcuts import render
 import killer.DataBaseControl as db
 import squilt3
 # Create your views here.
@@ -25,9 +25,4 @@ def set_wins(name, wins):
     cursor.execute(sql)
     conn.commit()
 
-"""
-    db.add_user(name)
-    db.set_kills(name, kills)
-    db.set_wins(name, wins)
-"""
 conn.close()
