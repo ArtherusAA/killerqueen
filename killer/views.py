@@ -94,4 +94,17 @@ def bot_request(request):
                     if len(user) == 0:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'target': user[0]['target']})
+            elif request.POST['action'] == 'registration':
+                requirements = ['user', 'nickname']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.get(request.POST['user'])
+                    if len(user) > 0:
+                        return HttpResponse(status_code=400)
+                    user = User(user=request.POST['user'], nickname=request.POST['nickname'], game='', target='',
+                                user_identifier='', condition='')
+                    user.save()
+                    return HttpResponse(status_code=200)
     return HttpResponse(status=403)
