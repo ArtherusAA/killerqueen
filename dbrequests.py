@@ -42,7 +42,7 @@ def join_game(user, game, target, user_identifier, condition, nickname):
     response = requests.post(url, params)
     return response.status_code
 
-def create_game(game, condition, winner=None):
+def create_game(game, condition, winner):
     params = {
         'action': 'create_game',
         'game': game,
@@ -79,3 +79,12 @@ def get_user_target(user):
     if target['error'] == 'ok':
         return target['target']
     return target['error']
+
+def registration(user, nickname):
+    params = {
+        'action': 'registration',
+        'user': user,
+        'nickname': nickname,
+    }
+    response = requests.post(url, params)
+    return response.status_code
