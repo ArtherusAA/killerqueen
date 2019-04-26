@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from killer.models import GameModel, User
+from django.views.decorators.csrf import csrf_exempt
 
-
+@csrf_exempt
 def bot_request(request):
     if request.method == 'POST':
+        print(request.POST)
         if 'action' in request.POST.keys():
+            print(request.POST['action'])
             if request.POST['action'] == 'create_game':
                 requirements = ['game', 'condition', 'winner']
                 checker = True
@@ -38,7 +41,7 @@ def bot_request(request):
                     player = User.objects.get(user=request.POST['user'])
                     if len(player) == 0:
                         return HttpResponse(status=400)
-                    if player[0]['game'] != '':
+                    if player['game'] != '':
                         return HttpResponse(status=401)
                     User.objects.all().filter(user=request.POST['user']).update(
                                                                     game=request.POST['game'],
@@ -95,16 +98,19 @@ def bot_request(request):
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'target': user[0]['target']})
             elif request.POST['action'] == 'registration':
+                print(22847)
                 requirements = ['user', 'nickname']
                 checker = True
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    user = User.objects.get(request.POST['user'])
+                    print(22847)
+                    user = User.objects.get(user=request.POST['user'])
+                    print(22847)
                     if len(user) > 0:
-                        return HttpResponse(status_code=400)
+                        return HttpResponse(status=400)
                     user = User(user=request.POST['user'], nickname=request.POST['nickname'], game='', target='',
                                 user_identifier='', condition='')
                     user.save()
-                    return HttpResponse(status_code=200)
+                    return HttpResponse(status=200)
     return HttpResponse(status=403)
