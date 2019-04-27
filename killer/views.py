@@ -15,7 +15,7 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    games_with_same_id = GameModel.objects.get(game=request.POST['game'])
+                    games_with_same_id = GameModel.objects.all().filter(game=request.POST['game'])
                     if len(games_with_same_id) > 0:
                         return HttpResponse(status=400)
                     game = GameModel(game=request.POST['game'], condition=request.POST['condition'],
@@ -28,7 +28,7 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    user = User.objects.get(request.POST['user'])
+                    user = User.objects.all().filter(request.POST['user'])
                     if len(user) == 0:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'game': user[0]['game']})
@@ -38,7 +38,7 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    player = User.objects.get(user=request.POST['user'])
+                    player = User.objects.all().filter(user=request.POST['user'])
                     if len(player) == 0:
                         return HttpResponse(status=400)
                     if player['game'] != '':
@@ -56,7 +56,7 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    users = User.objects.get(request.POST['game'])
+                    users = User.objects.all().filter(request.POST['game'])
                     if len(users) == 0:
                         return JsonResponse({'error': 'no_such_users'})
                     response = {'error': 'ok'}
@@ -69,7 +69,7 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    player = User.objects.get(user=request.POST['user'])
+                    player = User.objects.all().filter(user=request.POST['user'])
                     if len(player) == 0:
                         return HttpResponse(status=400)
                     if player[0]['game'] != request.POST['game']:
@@ -82,7 +82,7 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    player = User.objects.get(user=request.POST['user'])
+                    player = User.objects.all().filter(user=request.POST['user'])
                     if len(player) == 0:
                         return HttpResponse(status=400)
                     User.objects.all().filter(user=request.POST['user']).update(target=request.POST['target'])
@@ -93,7 +93,7 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    user = User.objects.get(request.POST['user'])
+                    user = User.objects.all().filter(request.POST['user'])
                     if len(user) == 0:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'target': user[0]['target']})
@@ -105,7 +105,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     print(22847)
-                    user = User.objects.get(user=request.POST['user'])
+                    user = User.objects.all().filter(user=request.POST['user'])
                     print(22847)
                     if len(user) > 0:
                         return HttpResponse(status=400)
