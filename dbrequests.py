@@ -75,7 +75,7 @@ def get_user_target(user):
         'action': 'get_user_target',
         'user': user,
     }
-    target = json.loads(requests.post(url, params))
+    target = json.loads(requests.post(url, params).content.decode('utf-8'))
     if target['error'] == 'ok':
         return target['target']
     return target['error']
