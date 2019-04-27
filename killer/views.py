@@ -28,10 +28,10 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    user = User.objects.all().filter(request.POST['user'])
+                    user = User.objects.all().filter(user=request.POST['user'])
                     if len(user) == 0:
                         return JsonResponse({'error': 'no_such_user'})
-                    return JsonResponse({'error': 'ok', 'game': user[0]['game']})
+                    return JsonResponse({'error': 'ok', 'game': user[0].game})
             elif request.POST['action'] == 'join_game':
                 requirements = ['game', 'user', 'target', 'user_identifier', 'condition', 'nickname']
                 checker = True
@@ -56,12 +56,12 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    users = User.objects.all().filter(request.POST['game'])
+                    users = User.objects.all().filter(game=request.POST['game'])
                     if len(users) == 0:
                         return JsonResponse({'error': 'no_such_users'})
                     response = {'error': 'ok'}
                     for i in range(len(users)):
-                        response['user' + str(i)] = users[i]['user']
+                        response['user' + str(i)] = users[i].user
                     return JsonResponse(response)
             elif request.POST['action'] == 'remove_player_from_game':
                 requirements = ['game', 'user']
@@ -93,10 +93,10 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    user = User.objects.all().filter(request.POST['user'])
+                    user = User.objects.all().filter(user=request.POST['user'])
                     if len(user) == 0:
                         return JsonResponse({'error': 'no_such_user'})
-                    return JsonResponse({'error': 'ok', 'target': user[0]['target']})
+                    return JsonResponse({'error': 'ok', 'target': user[0].target})
             elif request.POST['action'] == 'registration':
                 print(22847)
                 requirements = ['user', 'nickname']
