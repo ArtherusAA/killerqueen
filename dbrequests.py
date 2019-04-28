@@ -10,7 +10,7 @@ def get_players(game):
         'action': 'get_players',
         'game': game,
     }
-    users = json.loads(requests.post(url, params))
+    users = json.loads(requests.post(url, params).content.decode('utf-8'))
     if users['error'] == 'ok':
         players = []
         for key in users.keys():
@@ -24,7 +24,7 @@ def get_game(user):
         'action': 'get_game',
         'user': user,
     }
-    game = json.loads(requests.post(url, params))
+    game = json.loads(requests.post(url, params).content.decode('utf-8'))
     if game['error'] == 'ok':
         return game['game']
     return game['error']
