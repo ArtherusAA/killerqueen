@@ -10,7 +10,7 @@ def bot_request(request):
         if 'action' in request.POST.keys():
             print(request.POST['action'])
             if request.POST['action'] == 'create_game':
-                requirements = ['game', 'condition', 'winner']
+                requirements = ['game']
                 checker = True
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
@@ -18,8 +18,8 @@ def bot_request(request):
                     games_with_same_id = GameModel.objects.all().filter(game=request.POST['game'])
                     if len(games_with_same_id) > 0:
                         return HttpResponse(status=400)
-                    game = GameModel(game=request.POST['game'], condition=request.POST['condition'],
-                                     winner=request.POST['winner'])
+                    game = GameModel(game=request.POST['game'], condition='',
+                                     winner='')
                     game.save()
                     return HttpResponse(status=200)
             elif request.POST['action'] == 'get_game':
@@ -33,7 +33,7 @@ def bot_request(request):
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'game': user[0].game})
             elif request.POST['action'] == 'join_game':
-                requirements = ['game', 'user', 'target', 'user_identifier', 'condition', 'nickname']
+                requirements = ['game', 'user']
                 checker = True
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
@@ -45,10 +45,9 @@ def bot_request(request):
                         return HttpResponse(status=401)
                     User.objects.all().filter(user=request.POST['user']).update(
                                                                     game=request.POST['game'],
-                                                                    target=request.POST['target'],
-                                                                    user_identifier=request.POST['user_identifier'],
-                                                                    condition=request.POST['condition'],
-                                                                    nickname=request.POST['nickname'])
+                                                                    target='',
+                                                                    user_identifier='',
+                                                                    condition='')
                     return HttpResponse(status=200)
             elif request.POST['action'] == 'get_players':
                 requirements = ['game']
