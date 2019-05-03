@@ -29,25 +29,19 @@ def get_game(user):
         return game['game']
     return game['error']
 
-def join_game(user, game, target, user_identifier, condition, nickname):
+def join_game(user, game):
     params = {
         'action': 'join_game',
         'user': user,
         'game': game,
-        'target': target,
-        'user_identifier': user_identifier,
-        'condition': condition,
-        'nickname': nickname,
     }
     response = requests.post(url, params)
     return response.status_code
 
-def create_game(game, condition, winner):
+def create_game(game):
     params = {
         'action': 'create_game',
         'game': game,
-        'condition': condition,
-        'winner': winner,
     }
     response = requests.post(url, params)
     return response.status_code
