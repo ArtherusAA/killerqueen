@@ -51,7 +51,7 @@ def hello(last_chat_id, last_chat_name, last_chat_text, hour):
         greet_bot.send_message(last_chat_id, 'Добрый вечер, {}'.format(last_chat_name))
         #today += 1
 
-def last_mess():
+def last_mess(last_chat_id):
     f = open('/Users/jonathan/Documents/PromProg/FInal_proj/killergame/lastmes.txt', 'r')
     ans = f.read()
     greet_bot.send_message(last_chat_id, ans[len(ans) - 100:])
@@ -75,24 +75,23 @@ def main():
 
     while True:
         try:
+
             greet_bot.get_updates(new_offset)
-
             last_update = greet_bot.get_last_update()
-
             last_update_id = last_update['update_id']
             last_chat_text = last_update['message']['text']
             last_chat_id = last_update['message']['chat']['id']
             last_chat_name = last_update['message']['chat']['first_name']
-
+###########################################################################
             if (abs(now.hour - hour) >= 1):
                 hour = hour.now
                 hello(last_chat_id, last_chat_name, last_chat_text, hour)
-
+###########################################################################
             text = list(last_chat_text.lower().split())
-
+###########################################################################
             if last_chat_name == 'Jonathan⚡️' and text[0] == '/last_mess':
-                last_mess()
-
+                last_mess(last_chat_id)
+###########################################################################
             elif (text[0] == '/make_game'):
                 try:
                     str = make_game()
@@ -100,33 +99,35 @@ def main():
                 #и проверить играет ли уже парень
                 except:
                     greet_bot.send_message(last_chat_id, 'Я такое не умею, может в следующий раз')
-
-
+###########################################################################
             elif (text[0] == '/join'): # проверить существует ли такое лобби и не играют ли уже там
                 try:
 
                     greet_bot.send_message(last_chat_id, 'Отлично сейчас я добавлю тебя в лобби: ' + text[len(text) - 1])
                 except:
                     greet_bot.send_message(last_chat_id, 'Я такое не умею, может в следующий раз')
-
-            elif last_chat_text.lower():
+###########################################################################
+            elif (text[0] == '/add'):
                 try:
-                    if str(text[0]) == 'add':
-                        text = map(int, text[1:])
-                        greet_bot.send_message(last_chat_id, 'Сумма чисел, {}'.format(sum(text)))
-
-                    elif str(text[0]).lower() == 'jesus':
-                        f = open('/Users/jonathan/Documents/PromProg/FInal_proj/killergame/Jesus.txt', 'r')
-                        jesus = f.read()
-                        f.close()
-                        greet_bot.send_message(last_chat_id, 'пока не робит соре')
+                    text = map(int, text[1:])
+                    greet_bot.send_message(last_chat_id, 'Сумма чисел, {}'.format(sum(text)))
                 except:
                     greet_bot.send_message(last_chat_id, 'Ой ОЙ оЙ, за такое положен бан')
+###########################################################################
+            elif text[0] == '/jesus':
+                try:
+                    f = open('/Users/jonathan/Documents/PromProg/FInal_proj/killergame/Jesus.txt', 'r')
+                    jesus = f.read()
+                    greet_bot.send_message(last_chat_id, jesus)
+                    f.close()
+                except:
+                    greet_bot.send_message(last_chat_id, 'Ой ОЙ оЙ, за такое положен бан')
+###########################################################################
 
             file = open('/Users/jonathan/Documents/PromProg/FInal_proj/killergame/lastmes.txt', 'a')
             file.write(last_chat_name + ' ' + last_chat_text + '\n')
             file.close()
-            print(last_chat_name, last_chat_text)# View who is write && what
+            print(last_chat_name, last_chat_id, last_chat_text)# View who is write && what
             #print(last_update['message'])
             new_offset = last_update_id + 1
         except:
