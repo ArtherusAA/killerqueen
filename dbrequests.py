@@ -82,3 +82,20 @@ def registration(user, nickname):
     }
     response = requests.post(url, params)
     return response.status_code
+
+def leave_game(user):
+    params = {
+        'action': 'leave_game',
+        'user': user,
+    }
+    response = request.post(url, params)
+    return response.status_code
+
+def establish_winner(user, game):
+    params = {
+        'action': 'establish_winner',
+        'user': user,
+        'game': game
+    }
+    response = request.post(url, params)
+    return response.status_code
