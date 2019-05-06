@@ -2,6 +2,7 @@ import requests
 import datetime
 import random
 from telegram import ParseMode
+from dbrequests import create_game, get_game, get_players, join_game, leave_game, registration
 
 class BotHandler:
 
@@ -62,8 +63,7 @@ def make_game():
     for i in range(12):
         if i % 3 == 0 and i != 0:
             ans += '-'
-        ans += chr(random.randint(66, 122))
-    ans = ans.upper()
+        ans += chr(random.randint(65, 91))
     return ans
 
 def main():
@@ -83,10 +83,6 @@ def main():
             last_chat_id = last_update['message']['chat']['id']
             last_chat_name = last_update['message']['chat']['first_name']
 ###########################################################################
-            if (abs(now.hour - hour) >= 1):
-                hour = hour.now
-                hello(last_chat_id, last_chat_name, last_chat_text, hour)
-###########################################################################
             text = list(last_chat_text.lower().split())
 ###########################################################################
             if last_chat_name == 'Jonathan⚡️' and text[0] == '/last_mess':
@@ -94,25 +90,40 @@ def main():
 ###########################################################################
             elif (text[0] == '/make_game'):
                 try:
-                    str = make_game()
-                    greet_bot.send_message(last_chat_id, 'Отлично твоя игра создана, её уникальный номер: ' + str) #надо создать лоби с номером str
-                #и проверить играет ли уже парень
+                    if get_user_target(last_chat_id == ): # what target?
+                        str = make_game()
+                        create_game(str)
+                        join_game(last_chat_id, str)
+                        greet_bot.send_message(last_chat_id, 'Отлично твоя игра создана, её уникальный номер: ' + str)
+                        set_target_to_user(last_chat_id, ) #what target?
+                    else:
+                        greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. находишься в
+                         другой игре. Доиграй или покинь её')
                 except:
                     greet_bot.send_message(last_chat_id, 'Я такое не умею, может в следующий раз')
 ###########################################################################
             elif (text[0] == '/join'): # проверить существует ли такое лобби и не играют ли уже там
                 try:
-
-                    greet_bot.send_message(last_chat_id, 'Отлично сейчас я добавлю тебя в лобби: ' + text[len(text) - 1])
+                    game = text[len(text) - 1]
+                    if get_game(game == ): #what target? if game are going how i can check it?
+                        if get_user_target(last_chat_id == ): #what target?
+                            greet_bot.send_message(last_chat_id, 'Отлично сейчас я добавлю тебя в лобби: ' + game)
+                            join_game(last_chat_id, game)
+                            set_target_to_user(last_chat_id, ) #what target?
+                        else:
+                            greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. находишься в
+                             другой игре. Доиграй или покинь её')
+                    else:
+                        greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. такой игры нет или она уже идёт(((')
                 except:
                     greet_bot.send_message(last_chat_id, 'Я такое не умею, может в следующий раз')
 ###########################################################################
-            elif (text[0] == '/add'):
-                try:
-                    text = map(int, text[1:])
-                    greet_bot.send_message(last_chat_id, 'Сумма чисел, {}'.format(sum(text)))
-                except:
-                    greet_bot.send_message(last_chat_id, 'Ой ОЙ оЙ, за такое положен бан')
+            # elif (text[0] == '/add'):
+            #     try:
+            #         text = map(int, text[1:])
+            #         greet_bot.send_message(last_chat_id, 'Сумма чисел, {}'.format(sum(text)))
+            #     except:
+            #         greet_bot.send_message(last_chat_id, 'Ой ОЙ оЙ, за такое положен бан')
 ###########################################################################
             elif text[0] == '/jesus':
                 try:
