@@ -99,3 +99,12 @@ def establish_winner(user, game):
     }
     response = request.post(url, params)
     return response.status_code
+
+def change_games_condition(game, condition):
+    params = {
+        'action': 'change_games_condition',
+        'game': game,
+        'condition': condition,
+    }
+    response = request.post(url, params)
+    return response.status_code
