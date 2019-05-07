@@ -112,4 +112,38 @@ def bot_request(request):
                                 user_identifier='', condition='')
                     user.save()
                     return HttpResponse(status=200)
+            elif request.POST['action'] == 'leave_game':
+                requirements = ['user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    player = User.objects.all().filter(user=request.POST['user'])
+                    if len(player) == 0:
+                        return HttpResponse(status=400)
+                    User.objects.all().filter(user=request.POST['user']).update(game='')
+                    return HttpResponse(status=200)
+            elif request.POST['action'] == 'establish_winner':
+                requirements = ['user', 'game']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    game = GameModel.objects.all().filter(user=request.POST['game'])
+                    if len(game) == 0:
+                        return HttpResponse(status=400)
+                    GameModel.objects.all().filter(game=request.POST['game']).update(winner=request.POST['user'])
+                    return HttpResponse(status=200)
+            elif request.POST['action'] == 'change_games_condition':
+                requirements = ['condition', 'game']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    game = GameModel.objects.all().filter(user=request.POST['game'])
+                    if len(game) == 0:
+                        return HttpResponse(status=400)
+                    GameModel.objects.all().filter(game=request.POST['game']).update(
+                        condition=request.POST['condition'])
+                    return HttpResponse(status=200)
     return HttpResponse(status=403)
