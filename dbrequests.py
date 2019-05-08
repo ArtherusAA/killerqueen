@@ -108,3 +108,32 @@ def change_games_condition(game, condition):
     }
     response = request.post(url, params)
     return response.status_code
+
+def get_games_condition(game):
+    params = {
+        'action': 'get_games_condition',
+        'game': game,
+    }
+    condition = json.loads(requests.post(url, params).content.decode('utf-8'))
+    if condition['error'] == 'ok':
+        return condition['condition']
+    return condition['error']
+
+def change_players_condition(user, condition):
+    params = {
+        'action': 'change_players_condition',
+        'user': user,
+        'condition': condition,
+    }
+    response = request.post(url, params)
+    return response.status_code
+
+def get_players_condition(user):
+    params = {
+        'action': 'get_players_condition',
+        'user': user,
+    }
+    condition = json.loads(requests.post(url, params).content.decode('utf-8'))
+    if condition['error'] == 'ok':
+        return condition['condition']
+    return condition['error']
