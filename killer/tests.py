@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+import json
 
 class BotRequestTest(TestCase):
 
@@ -152,15 +153,15 @@ class BotRequestTest(TestCase):
             'action': 'get_game',
             'user': 'artem1',
         }
-        response = json.loads(client.post('/bot_request/', params).content.decode(utf-8))
+        response = json.loads(client.post('/bot_request/', params).content.decode('utf-8'))
         self.assertEqual(response['error'], 'ok')
         self.assertEqual(response['game'], 'game1')
-        
+
     def test_get_nonexistent_user_game(self):
         client = Client()
         params = {
             'action': 'get_game',
             'user': 'omg',
         }
-        response = json.loads(client.post('/bot_request/', params).content.decode(utf-8))
+        response = json.loads(client.post('/bot_request/', params).content.decode('utf-8'))
         self.assertEqual(response['error'], 'no_such_user')
