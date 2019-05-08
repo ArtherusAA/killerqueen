@@ -146,11 +146,21 @@ class BotRequestTest(TestCase):
         self.assertEqual(response.status_code, 401)
 
     # get_game()
-    def test_get_correct_game(user):
+    def test_get_correct_game(self):
         client = Client()
         params = {
             'action': 'get_game',
             'user': 'artem1',
         }
         response = json.loads(client.post('/bot_request/', params).content.decode(utf-8))
+        self.assertEqual(response['error'], 'ok')
         self.assertEqual(response['game'], 'game1')
+        
+    def test_get_nonexistent_user_game(self):
+        client = Client()
+        params = {
+            'action': 'get_game',
+            'user': 'omg',
+        }
+        response = json.loads(client.post('/bot_request/', params).content.decode(utf-8))
+        self.assertEqual(response['error'], 'no_such_user')
