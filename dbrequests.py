@@ -106,7 +106,7 @@ def change_games_condition(game, condition):
         'game': game,
         'condition': condition,
     }
-    response = request.post(url, params)
+    response = requests.post(url, params)
     return response.status_code
 
 def get_games_condition(game):
@@ -125,7 +125,7 @@ def change_players_condition(user, condition):
         'user': user,
         'condition': condition,
     }
-    response = request.post(url, params)
+    response = requests.post(url, params)
     return response.status_code
 
 def get_players_condition(user):

@@ -2,7 +2,7 @@ import requests
 import datetime
 import random
 from telegram import ParseMode
-from dbrequests import create_game, get_game, get_players, join_game, leave_game, registration
+import dbrequests as dbr
 
 class BotHandler:
 
@@ -53,7 +53,7 @@ def hello(last_chat_id, last_chat_name, last_chat_text, hour):
         #today += 1
 
 def last_mess(last_chat_id):
-    f = open('/Users/jonathan/Documents/PromProg/FInal_proj/killergame/lastmes.txt', 'r')
+    f = open('/Users/jonathan/Documents/PromProg/FInal_proj/killerqueen/lastmes.txt', 'r')
     ans = f.read()
     greet_bot.send_message(last_chat_id, ans[len(ans) - 100:])
     f.close()
@@ -66,25 +66,12 @@ def make_game():
         ans += chr(random.randint(65, 91))
     return ans
 
-def get_victim(game, victim, k = 0):
-    if(k != len(game)):
-        if (victim == None):
-            victim = []
+def get_victim(game):
 
-        killer = ''
-        while (get_user_target(killer) == 'free'):
-            killer = game[random.randint(0, len(game) - 1)]
-
-        zhertva = ''
-        while (zhertva == killer or zhertva in game):
-            zhertva = game[random.randint(0, len(game) - 1)]
-        victim.append(zhertva)
-        get_user_target(killer, zhertva)
-        k += 1
-        get_victim(game, victim, k)
-
-    else:
-        return
+    random.shuffle(game)
+    for i in range(0, len(game) - 1):
+        dbr.get_user_target(game[i], game[i + 1])
+    dbr.get_user_target(game[len(game) - 1], 0)
 
 def main():
     new_offset = None
@@ -102,6 +89,7 @@ def main():
         last_chat_text = last_update['message']['text']
         last_chat_id = last_update['message']['chat']['id']
         last_chat_name = last_update['message']['chat']['first_name']
+        dbr.registration(str(last_chat_id), '@' + last_update['message']['chat']['username'])
 ###########################################################################
         text = list(last_chat_text.lower().split())
         #print(text)
@@ -110,26 +98,27 @@ def main():
             last_mess(last_chat_id)
 ###########################################################################
         elif (text[0] == '/make_game'):
-            try:
-                if get_user_target(last_chat_id == 'free'): # what target?
-                    str = make_game()
-                    create_game(str)
-                    join_game(last_chat_id, str)
-                    greet_bot.send_message(last_chat_id, 'Отлично твоя игра создана, её уникальный номер: ' + str)
-                    set_target_to_user(last_chat_id, 'playing') #what target?
-                else:
-                    greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. находишься в другой игре. Доиграй или покинь её')
-            except:
-                greet_bot.send_message(last_chat_id, 'Я такое не умею, может в следующий раз')
+            #try:
+            if dbr.get_players_condition(str(last_chat_id) != 'playing'): # what target?
+                name_of_game = make_game()
+                print(dbr.create_game(name_of_game))
+                print(dbr.change_games_condition(name_of_game, 'wait'))
+                print(dbr.join_game(str(last_chat_id), name_of_game))
+                print(dbr.change_players_condition(str(last_chat_id), 'playing'))
+                greet_bot.send_message(last_chat_id, 'Отлично твоя игра создана, её уникальный номер: ' + name_of_game)
+            else:
+                greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. находишься в другой игре. Доиграй или покинь её')
+            #except:
+            #    greet_bot.send_message(last_chat_id, 'Я такое не умею, может в следующий раз')
 ###########################################################################
         elif (text[0] == '/join'): # проверить существует ли такое лобби и не играют ли уже там
             try:
                 game = text[len(text) - 1]
                 #if get_game(game == 'wait'): #what target? if game are going how i can check it?
-                if get_user_target(last_chat_id == 'free'): #what target?
+                if dbr.get_players_condition(last_chat_id != 'playing') and get_games_condition(game, 'going'): #what target?
                     greet_bot.send_message(last_chat_id, 'Отлично сейчас я добавлю тебя в лобби: ' + game)
-                    join_game(last_chat_id, game)
-                    set_target_to_user(last_chat_id, 'playing') #what target?
+                    dbr.join_game(last_chat_id, game)
+                    dbr.set_target_to_user(last_chat_id, 'playing') #what target?
                 else:
                     greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. находишься в другой игре. Доиграй или покинь её')
                 # else:
@@ -142,7 +131,8 @@ def main():
                 for i in get_game(last_chat_id):
                     greet_bot.send_message(i, 'Игра начинается!')
 
-                get_victim(get_players(get_game(last_chat_id)), None, 0)
+                dbr.get_victim(get_players(get_game(last_chat_id)))
+                dbr.change_games_condition(get_game(last_chat_id), 'going')
 
                 for i in get_game(last_chat_id):
                     greet_bot.send_message(i, 'Игра начилась, Удачи!')
@@ -166,7 +156,7 @@ def main():
                 greet_bot.send_message(last_chat_id, 'Ой ОЙ оЙ, за такое положен бан')
 ###########################################################################
 
-        file = open('/Users/jonathan/Documents/PromProg/FInal_proj/killergame/lastmes.txt', 'a')
+        file = open('/Users/jonathan/Documents/PromProg/FInal_proj/killerqueen/lastmes.txt', 'a')
         file.write(last_chat_name + ' ' + last_chat_text + '\n')
         file.close()
         print(last_chat_name, last_chat_id, last_chat_text)# View who is write && what
