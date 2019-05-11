@@ -41,7 +41,7 @@ def bot_request(request):
                     player = User.objects.all().filter(user=request.POST['user'])
                     if len(player) == 0:
                         return HttpResponse(status=400)
-                    if player[0]['game'] != '':
+                    if player[0].game != '':
                         return HttpResponse(status=401)
                     User.objects.all().filter(user=request.POST['user']).update(
                                                                     game=request.POST['game'],
