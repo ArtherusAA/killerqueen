@@ -28,7 +28,7 @@
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/killer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="38" selection-start="6835" selection-end="6835" vertical-scroll-proportion="0.7380952" vertical-offset="1395" max-vertical-offset="3090">
+            <state line="196" column="76" selection-start="10797" selection-end="10797" vertical-scroll-proportion="0.6904762" vertical-offset="2460" max-vertical-offset="3090">
               <folding />
             </state>
           </provider>
@@ -38,6 +38,15 @@
         <entry file="file://$PROJECT_DIR$/dbrequests.py">
           <provider selected="true" editor-type-id="text-editor">
             <state line="121" column="28" selection-start="2944" selection-end="2968" vertical-scroll-proportion="-10.8" vertical-offset="1530" max-vertical-offset="2160">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/killer/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="13" selection-start="429" selection-end="438" vertical-scroll-proportion="-8.4" vertical-offset="0" max-vertical-offset="330">
               <folding />
             </state>
           </provider>
@@ -108,6 +117,30 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="killergame" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="killergame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="killerqueen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="killergame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="killerqueen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="killer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -335,7 +368,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/killer/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
+        <state line="14" column="13" selection-start="429" selection-end="438" vertical-scroll-proportion="-8.4" vertical-offset="0" max-vertical-offset="330">
           <folding />
         </state>
       </provider>
@@ -349,7 +382,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/killer/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="38" selection-start="6835" selection-end="6835" vertical-scroll-proportion="0.7380952" vertical-offset="1395" max-vertical-offset="3090">
+        <state line="196" column="76" selection-start="10797" selection-end="10797" vertical-scroll-proportion="0.6904762" vertical-offset="2460" max-vertical-offset="3090">
           <folding />
         </state>
       </provider>
