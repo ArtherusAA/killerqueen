@@ -137,3 +137,13 @@ def get_players_condition(user):
     if condition['error'] == 'ok':
         return condition['condition']
     return condition['error']
+
+def get_user_killer(user):
+    params = {
+        'action': 'get_user_killer',
+        'user': user,
+    }
+    response = json.loads(requests.post(url, params).content.decode('utf-8'))
+    if response['error'] == 'ok':
+        return response['killer']
+    return response['error']
