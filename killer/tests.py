@@ -22,7 +22,7 @@ class BotRequestTest(TestCase):
             'nickname': 'sobaka2'
         }
         response = client.post('/bot_request/', params)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 228)
 
     def test_registration_without_user(self):
         client = Client()
@@ -32,7 +32,7 @@ class BotRequestTest(TestCase):
             'nickname': '@sobaka3'
         }
         response = client.post('/bot_request/', params)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_registration_without_nickname(self):
         client = Client()
@@ -42,7 +42,7 @@ class BotRequestTest(TestCase):
             'nickname': ''
         }
         response = client.post('/bot_request/', params)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 402)
 
     def test_incorrect_nickname(self):
         client = Client()
@@ -97,7 +97,7 @@ class BotRequestTest(TestCase):
             'game': '',
         }
         response = client.post('/bot_request/', params)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     # join_game()
     def test_correct_joining_game(self):
@@ -209,4 +209,5 @@ class BotRequestTest(TestCase):
         for key in users.keys():
             if key[:4] == 'user':
                 players.append(users[key])
+        players.sort()
         self.assertEqual(players, ['art0', 'art1', 'art2'])
