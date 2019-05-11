@@ -128,8 +128,8 @@ def main():
 
             elif text[0] == '/start_game' and dbr.get_games_condition(dbr.get_game(str(last_chat_id)).upper()) == 'wait':
                 #try:
-                print('check_it')
-                print(dbr.get_players(dbr.get_game(str(last_chat_id))))
+                get_victim(dbr.get_players(dbr.get_game(str(last_chat_id))))
+                dbr.change_games_condition(dbr.get_game(str(last_chat_id)), 'going')
                 for i in dbr.get_players(dbr.get_game(str(last_chat_id))):
                     print(i)
                     greet_bot.send_message(i, 'Игра начинается! Отдай этот код своему убийце, если конечно тебя убили!')
@@ -137,32 +137,24 @@ def main():
                     greet_bot.send_message(i, code)
 
 
-                get_victim(dbr.get_players(dbr.get_game(str(last_chat_id))))
-                dbr.change_games_condition(dbr.get_game(str(last_chat_id)), 'going')
 
-                for i in dbr.get_game(str(last_chat_id)):
-                    greet_bot.send_message(i, 'Игра начилась, Удачи!')
+
             #except:
             #        print('Error')
-            elif text[0] == '/leave' and dbr.get_players_condition(str(last_chat_id) == 'playing'):
-                if dbr.get_games_condition(dbr.get_game(last_chat_id)) == 'wait':
+            elif text[0] == '/leave' and dbr.get_players_condition(str(last_chat_id)) == 'playing':
+
+                if dbr.get_games_condition(dbr.get_game(str(last_chat_id)).upper()) == 'wait':
                     dbr.change_players_condition(str(last_chat_id), 'free')
-                    dbr.remove_player_from_game(dbr.get_game(last_chat_id).upper(), str(last_chat_id))
-                elif dbr.get_games_condition(dbr.get_game(last_chat_id)) == 'going':  # you need make function find_killer
+                    dbr.leave_game(str(last_chat_id))
+
+                elif dbr.get_games_condition(dbr.get_game(str(last_chat_id)).upper()) == 'going':  # you need make function find_killer
                     dbr.change_players_condition(str(last_chat_id), 'free')
                     dbr.set_target_to_user(dbr.get_user_killer(str(last_chat_id)), dbr.get_user_target(str(last_chat_id)))
                     dbr.set_target_to_user(str(last_chat_id), '')
-                    dbr.remove_player_from_game(dbr.get_game(last_chat_id).upper(), str(last_chat_id))
+                    dbr.leave_game(str(last_chat_id))
                 else:
                     greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. не играешь')
 
-            elif (text[0] == '/add'):
-                try:
-                    text = map(int, text[1:])
-                    greet_bot.send_message(last_chat_id, 'Сумма чисел, {}'.format(sum(text)))
-                except:
-                    greet_bot.send_message(last_chat_id, 'Ой ОЙ оЙ, за такое положен бан')
-    ###########################################################################
             elif text[0] == '/jesus':
                 try:
                     f = open('/Users/jonathan/Documents/PromProg/FInal_proj/killergame/Jesus.txt', 'r')

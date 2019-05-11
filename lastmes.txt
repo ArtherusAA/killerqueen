@@ -497,3 +497,28 @@ Jonathan /leave
 Jonathan /join JBA-JZY-CXM-HWA
 Jonathan /start_game
 Jonathan /add 0 0
+Jonathan /make_game
+Egorov /join  HRG-ABS-SIY-QKJ
+Jonathan /start
+Jonathan /start_game
+Jonathan /leave
+Jonathan /make_game
+Jonathan /leave
+Egorov /leave
+Jonathan /leave
+Jonathan /make_game
+Egorov /join  WFN-HFS-TWT-YJB
+Jonathan /start_game
+Jonathan /leave
+Jonathan /make_game
+Egorov /join WCL-RKH-WAF-GIF
+Jonathan /leave
+Jonathan /join WCL-RKH-WAF-GIF
+Jonathan /leave
+Jonathan /join WCL-RKH-WAF-GIF
+Jonathan /leave
+Jonathan /join WCL-RKH-WAF-GIF
+Jonathan /start_game
+Jonathan /leave
+Jonathan /leave
+Jonathan /join WCL-RKH-WAF-GIF
