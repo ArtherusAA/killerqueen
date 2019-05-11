@@ -203,7 +203,7 @@ class BotRequestTest(TestCase):
             'action': 'get_players',
             'game': 'gameTest',
         }
-        users = json.loads(requests.post(url, params).content.decode('utf-8'))
+        users = json.loads(client.post('/bot_request/', params).content.decode('utf-8'))
         self.assertEqual(users['error'], 'ok')
         players = []
         for key in users.keys():
