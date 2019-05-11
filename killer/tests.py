@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+import json
 
 class BotRequestTest(TestCase):
 
@@ -57,8 +58,15 @@ class BotRequestTest(TestCase):
         client = Client()
         params = {
             'action': 'registration',
-            'user': 'artem1',
-            'nickname': '@sobaka1'
+            'user': 'artem228',
+            'nickname': '@sobaka1488'
+        }
+        response = client.post('/bot_request/', params)
+        self.assertEqual(response.status_code, 200)
+        params = {
+            'action': 'registration',
+            'user': 'artem228',
+            'nickname': '@sobaka1488'
         }
         response = client.post('/bot_request/', params)
         self.assertEqual(response.status_code, 400)
@@ -144,3 +152,61 @@ class BotRequestTest(TestCase):
         }
         response = client.post('/bot_request/', params)
         self.assertEqual(response.status_code, 401)
+
+    # get_game()
+    def test_get_correct_game(self):
+        client = Client()
+        params = {
+            'action': 'get_game',
+            'user': 'artem1',
+        }
+        response = json.loads(client.post('/bot_request/', params).content.decode('utf-8'))
+        self.assertEqual(response['error'], 'ok')
+        self.assertEqual(response['game'], 'game1')
+
+    def test_get_nonexistent_user_game(self):
+        client = Client()
+        params = {
+            'action': 'get_game',
+            'user': 'omg',
+        }
+        response = json.loads(client.post('/bot_request/', params).content.decode('utf-8'))
+        self.assertEqual(response['error'], 'no_such_user')
+
+    # get_players()
+
+    def test_correct_get_players(self):
+        client = Client()
+        params = {
+            'action': 'create_game',
+            'game': 'gameTest',
+        }
+        response = client.post('/bot_request/', params)
+        self.assertEqual(response.status_code, 200)
+        for i in range(3):
+            user = 'art' + str(i)
+            params = {
+                'action': 'registration',
+                'user': user,
+                'nickname': '@dog' + str(i),
+            }
+            response = client.post('/bot_request/', params)
+            self.assertEqual(response.status_code, 200)
+            params = {
+                'action': 'join_game',
+                'user': user,
+                'game': 'gameTest',
+            }
+            response = client.post('/bot_request/', params)
+            self.assertEqual(response.status_code, 200)
+        params = {
+            'action': 'get_players',
+            'game': 'gameTest',
+        }
+        users = json.loads(requests.post(url, params).content.decode('utf-8'))
+        self.assertEqual(users['error'], 'ok')
+        players = []
+        for key in users.keys():
+            if key[:4] == 'user':
+                players.append(users[key])
+        self.assertEqual(players, ['art0', 'art1', 'art2'])
