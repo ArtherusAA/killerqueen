@@ -50,6 +50,15 @@ class BotRequestTest(TestCase):
         users = json.loads(client.post('/bot_request/', params).content.decode('utf-8'))
         return users
 
+    def setup_leave_game(self, user):
+        client = Client()
+        params = {
+            'action': 'leave_game',
+            'user': user,
+        }
+        response = client.post('/bot_request/', params)
+        return response
+
     # registration()
     def test_correct_registration(self):
         response = self.setup_registration('artem1', '@sobaka1')
@@ -174,3 +183,24 @@ class BotRequestTest(TestCase):
     def test_get_players_nonexistent_game(self):
         response = self.setup_get_players('gameTest2')
         self.assertEqual(response['error'], 'no_such_game')
+
+    #leave_game()
+    def test_correct_leave_game(self):
+        response = self.setup_registration('artem12', '@sobaka12')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_create_game('gameTest3')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_join_game('artem12', 'gameTest3')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_leave_game('artem12')
+        self.assertEqual(response.status_code, 200)
+
+    def test_leave_game_nonexistant_user(self):
+        response = self.setup_leave_game('artem13')
+        self.assertEqual(response.status_code, 400)
+
+    def test_leave_nonexistant_game(self):
+        response = self.setup_registration('artem14', '@sobaka14')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_leave_game('artem14')
+        self.assertEqual(response.status_code, 403)
