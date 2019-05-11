@@ -88,7 +88,7 @@ def leave_game(user):
         'action': 'leave_game',
         'user': user,
     }
-    response = request.post(url, params)
+    response = requests.post(url, params)
     return response.status_code
 
 def establish_winner(user, game):
@@ -97,7 +97,7 @@ def establish_winner(user, game):
         'user': user,
         'game': game
     }
-    response = request.post(url, params)
+    response = requests.post(url, params)
     return response.status_code
 
 def change_games_condition(game, condition):
@@ -106,7 +106,7 @@ def change_games_condition(game, condition):
         'game': game,
         'condition': condition,
     }
-    response = request.post(url, params)
+    response = requests.post(url, params)
     return response.status_code
 
 def get_games_condition(game):
@@ -125,7 +125,7 @@ def change_players_condition(user, condition):
         'user': user,
         'condition': condition,
     }
-    response = request.post(url, params)
+    response = requests.post(url, params)
     return response.status_code
 
 def get_players_condition(user):
