@@ -59,6 +59,16 @@ class BotRequestTest(TestCase):
         response = client.post('/bot_request/', params)
         return response
 
+    def setup_establish_winner(self, user, game):
+        client = Client()
+        params = {
+            'action': 'establish_winner',
+            'user': user,
+            'game': game,
+        }
+        response = client.post('/bot_request/', params)
+        return response
+
     # registration()
     def test_correct_registration(self):
         response = self.setup_registration('artem1', '@sobaka1')
@@ -203,4 +213,35 @@ class BotRequestTest(TestCase):
         response = self.setup_registration('artem14', '@sobaka14')
         self.assertEqual(response.status_code, 200)
         response = self.setup_leave_game('artem14')
+        self.assertEqual(response.status_code, 403)
+
+    #establish_winner()
+    def test_correct_establish_winner(self):
+        response = self.setup_registration('artem15', '@sobaka15')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_create_game('gameTest4')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_join_game('artem15', 'gameTest4')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_establish_winner('artem15', 'gameTest4')
+        self.assertEqual(response.status_code, 200)
+
+    def test_establish_winner_nonexitant_game(self):
+        response = self.setup_registration('artem16', '@sobaka16')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_establish_winner('artem16', 'gameTest5')
+        self.assertEqual(response.status_code, 400)
+
+    def test_establish_winner_nonPlaying_user(self):
+        response = self.setup_registration('artem17', '@sobaka17')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_create_game('gameTest6')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_establish_winner('artem17', 'gameTest6')
+        self.assertEqual(response.status_code, 403)
+
+    def test_establish_winner_nonexitant_user(self):
+        response = self.setup_create_game('gameTest7')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_establish_winner('artem18', 'gameTest7')
         self.assertEqual(response.status_code, 403)

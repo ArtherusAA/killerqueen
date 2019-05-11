@@ -147,3 +147,13 @@ def get_user_killer(user):
     if response['error'] == 'ok':
         return response['killer']
     return response['error']
+
+def get_nickname(user):
+    params = {
+        'action': 'get_nickname',
+        'user': user,
+    }
+    response = json.loads(requests.post(url, params).content.decode('utf-8'))
+    if response['error'] == 'ok':
+        return response['nickname']
+    return response['error']
