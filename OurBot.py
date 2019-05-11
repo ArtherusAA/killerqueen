@@ -63,7 +63,7 @@ def make_game():
     for i in range(12):
         if i % 3 == 0 and i != 0:
             ans += '-'
-        ans += chr(random.randint(65, 91))
+        ans += chr(random.randint(65, 90))
     return ans
 
 def get_victim(game):
@@ -98,33 +98,33 @@ def main():
             last_mess(last_chat_id)
 ###########################################################################
         elif (text[0] == '/make_game'):
-            #try:
-            if dbr.get_players_condition(str(last_chat_id) != 'playing'): # what target?
-                name_of_game = make_game()
-                print(dbr.create_game(name_of_game))
-                print(dbr.change_games_condition(name_of_game, 'wait'))
-                print(dbr.join_game(str(last_chat_id), name_of_game))
-                print(dbr.change_players_condition(str(last_chat_id), 'playing'))
-                greet_bot.send_message(last_chat_id, 'Отлично твоя игра создана, её уникальный номер: ' + name_of_game)
-            else:
-                greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. находишься в другой игре. Доиграй или покинь её')
-            #except:
-            #    greet_bot.send_message(last_chat_id, 'Я такое не умею, может в следующий раз')
-###########################################################################
-        elif (text[0] == '/join'): # проверить существует ли такое лобби и не играют ли уже там
             try:
-                game = text[len(text) - 1]
-                #if get_game(game == 'wait'): #what target? if game are going how i can check it?
-                if dbr.get_players_condition(last_chat_id != 'playing') and get_games_condition(game, 'going'): #what target?
-                    greet_bot.send_message(last_chat_id, 'Отлично сейчас я добавлю тебя в лобби: ' + game)
-                    dbr.join_game(last_chat_id, game)
-                    dbr.set_target_to_user(last_chat_id, 'playing') #what target?
+                if dbr.get_players_condition(str(last_chat_id) != 'playing'): # what target?
+                    name_of_game = make_game()
+                    print(dbr.create_game(name_of_game))
+                    print(dbr.change_games_condition(name_of_game, 'wait'))
+                    print(dbr.join_game(str(last_chat_id), name_of_game))
+                    print(dbr.change_players_condition(str(last_chat_id), 'playing'))
+                    greet_bot.send_message(last_chat_id, 'Отлично твоя игра создана, её уникальный номер: ' + name_of_game)
                 else:
                     greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. находишься в другой игре. Доиграй или покинь её')
-                # else:
-                #     greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. такой игры нет или она уже идёт(((')
             except:
                 greet_bot.send_message(last_chat_id, 'Я такое не умею, может в следующий раз')
+###########################################################################
+        elif (text[0] == '/join'): # проверить существует ли такое лобби и не играют ли уже там
+            #try:
+            game = text[len(text) - 1].upper()
+            #if get_game(game == 'wait'): #what target? if game are going how i can check it?
+            if dbr.get_players_condition(str(last_chat_id) != 'playing') and dbr.get_games_condition(game) == 'wait': #what target?
+                greet_bot.send_message(last_chat_id, 'Отлично сейчас я добавлю тебя в лобби: ' + game)
+                dbr.join_game(str(last_chat_id), game)
+                dbr.change_players_condition(str(last_chat_id), 'playing') #what target?
+            else:
+                greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. находишься в другой игре. Доиграй или покинь её')
+            # else:
+            #     greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. такой игры нет или она уже идёт(((')
+            #except:
+            #    greet_bot.send_message(last_chat_id, 'Я такое не умею, может в следующий раз')
 
         elif (text[0] == 'start_game'):
             try:
