@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8788391d-7f92-4caa-a150-89803c684b55" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/killer/views.py" afterPath="$PROJECT_DIR$/killer/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="killergame.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,7 +28,7 @@
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/killer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="128" column="76" selection-start="6965" selection-end="6965" vertical-scroll-proportion="0.54761904" vertical-offset="1530" max-vertical-offset="3090">
+            <state line="127" column="38" selection-start="6835" selection-end="6835" vertical-scroll-proportion="0.7380952" vertical-offset="1395" max-vertical-offset="3090">
               <folding />
             </state>
           </provider>
@@ -350,7 +349,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/killer/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="76" selection-start="6965" selection-end="6965" vertical-scroll-proportion="0.54761904" vertical-offset="1530" max-vertical-offset="3090">
+        <state line="127" column="38" selection-start="6835" selection-end="6835" vertical-scroll-proportion="0.7380952" vertical-offset="1395" max-vertical-offset="3090">
           <folding />
         </state>
       </provider>
