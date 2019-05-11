@@ -41,10 +41,13 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     player = User.objects.all().filter(user=request.POST['user'])
+                    game = GameModel.objects.all().filter(game=request.POST['game'])
                     if len(player) == 0:
                         return HttpResponse(status=400)
                     if player[0].game != '':
                         return HttpResponse(status=401)
+                    if len(game) == 0:
+                        return HttpResponse(status=402)
                     User.objects.all().filter(user=request.POST['user']).update(
                                                                     game=request.POST['game'],
                                                                     target='',
@@ -122,7 +125,8 @@ def bot_request(request):
                     for i in range(1, len(request.POST['nickname'])):
                         if not (ord('a') <= ord(request.POST['nickname'][i]) <= ord('z') or
                                 ord('A') <= ord(request.POST['nickname'][i]) <= ord('Z') or
-                                ord('1') <= ord(request.POST['nickname'][i]) <= ord('9')):
+                                ord('1') <= ord(request.POST['nickname'][i]) <= ord('9') or
+                                ord(request.POST['nickname'][i]) == ord('_')):
                             checker_for_nickname = False
                     if not checker_for_nickname:
                         return HttpResponse(status=228)
