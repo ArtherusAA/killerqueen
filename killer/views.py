@@ -18,6 +18,8 @@ def bot_request(request):
                     games_with_same_id = GameModel.objects.all().filter(game=request.POST['game'])
                     if len(games_with_same_id) > 0:
                         return HttpResponse(status=400)
+                    if request.POST['game'] == '':
+                        return HttpResponse(status=401)
                     game = GameModel(game=request.POST['game'], condition='',
                                      winner='')
                     game.save()
