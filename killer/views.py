@@ -115,6 +115,8 @@ def bot_request(request):
                     if request.POST['nickname'] == '':
                         return HttpResponse(status=402)
                     checker_for_nickname = True
+                    if len(request.POST['nickname']) < 2:
+                        checker_for_nickname = False
                     if request.POST['nickname'][0] != '@':
                         checker_for_nickname = False
                     for i in range(1, len(request.POST['nickname'])):
