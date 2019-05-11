@@ -114,6 +114,16 @@ def bot_request(request):
                         return HttpResponse(status=401)
                     if request.POST['nickname'] == '':
                         return HttpResponse(status=402)
+                    checker_for_nickname = True
+                    if request.POST['nickname'][0] != '@':
+                        checker_for_nickname = False
+                    for i in range(1, len(request.POST['nickname'])):
+                        if not (ord('a') <= ord(request.POST['nickname'][i]) <= ord('z') or
+                                ord('A') <= ord(request.POST['nickname'][i]) <= ord('Z') or
+                                ord('1') <= ord(request.POST['nickname'][i]) <= ord('9')):
+                            checker_for_nickname = False
+                    if not checker_for_nickname:
+                        return HttpResponse(status=228)
                     user = User(user=request.POST['user'], nickname=request.POST['nickname'], game='', target='',
                                 user_identifier='', condition='')
                     user.save()
