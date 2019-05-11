@@ -110,6 +110,8 @@ def bot_request(request):
                     print(22847)
                     if len(user) > 0:
                         return HttpResponse(status=400)
+                    if request.POST['user'] == '':
+                        return HttpResponse(status=401)
                     user = User(user=request.POST['user'], nickname=request.POST['nickname'], game='', target='',
                                 user_identifier='', condition='')
                     user.save()
