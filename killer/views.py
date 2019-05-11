@@ -194,7 +194,7 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    user = User.objects.all().filter(user=request.POST['game'])
+                    user = User.objects.all().filter(user=request.POST['user'])
                     if len(user) == 0:
                         return HttpResponse(status=400)
                     User.objects.all().filter(user=request.POST['user']).update(
