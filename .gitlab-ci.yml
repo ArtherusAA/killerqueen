@@ -15,7 +15,7 @@ stages:
 testing:
   stage: test
   script:
-    - python manage.py test
+    - coverage run manage.py test killer
 
 pylint:
   stage: style
