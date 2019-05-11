@@ -458,3 +458,42 @@ Jonathan⚡️ /make_game
 Archy /join RCP-PKI-GDY-LBR
 Archy /join RCP-PKI-GDY-LBR
 Archy /join RCP-PKI-GDY-LBR
+Jonathan⚡️ ва
+Jonathan⚡️ /make_game
+Egorov /join VMC-CES-VTT-JFK
+Максим /join VMC-CES-VTT-JFK
+Archy /join VMC-CES-VTT-JFK
+Jonathan⚡️ /start_game
+Jonathan⚡️ /start_game
+Jonathan⚡️ /start_game
+Jonathan⚡️ /start_game
+Jonathan⚡️ /start_game
+Jonathan⚡️ /start_game
+Jonathan⚡️ /start_game
+Jonathan⚡️ /start_game
+Jonathan⚡️ /leave
+Jonathan⚡️ /make_game
+Максим /leave
+Максим /join  WGM-RVN-ZFT-JVW
+Egorov /leave
+Egorov /join  WGM-RVN-ZFT-JVW
+Jonathan⚡️ /start_game
+Jonathan⚡️ /start_game
+Jonathan⚡️ /start_game
+Jonathan⚡️ /make_game
+Jonathan⚡️ /start_game
+Jonathan⚡️ /leave
+Jonathan⚡️ /leave
+Jonathan⚡️ /leave
+Jonathan⚡️ /join QTT-NCK-LKM-KCY
+Jonathan⚡️ /start_game
+Jonathan⚡️ /make_game
+Egorov /leave
+Egorov /join IDA-EGI-QVM-ZYN
+Jonathan⚡️ /start_game
+Egorov /leave
+Egorov /make_game
+Jonathan /leave
+Jonathan /join JBA-JZY-CXM-HWA
+Jonathan /start_game
+Jonathan /add 0 0
