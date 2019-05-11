@@ -22,7 +22,7 @@ class BotRequestTest(TestCase):
             'nickname': 'sobaka2'
         }
         response = client.post('/bot_request/', params)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 228)
 
     def test_registration_without_user(self):
         client = Client()
@@ -32,7 +32,7 @@ class BotRequestTest(TestCase):
             'nickname': '@sobaka3'
         }
         response = client.post('/bot_request/', params)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     def test_registration_without_nickname(self):
         client = Client()
@@ -42,7 +42,7 @@ class BotRequestTest(TestCase):
             'nickname': ''
         }
         response = client.post('/bot_request/', params)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 402)
 
     def test_incorrect_nickname(self):
         client = Client()
@@ -52,7 +52,7 @@ class BotRequestTest(TestCase):
             'nickname': '@'
         }
         response = client.post('/bot_request/', params)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 228)
 
     def test_repeated_registration(self):
         client = Client()
@@ -85,8 +85,10 @@ class BotRequestTest(TestCase):
         client = Client()
         params = {
             'action': 'create_game',
-            'game': 'game1',
+            'game': 'aaa',
         }
+        response = client.post('/bot_request/', params)
+        self.assertEqual(response.status_code, 200)
         response = client.post('/bot_request/', params)
         self.assertEqual(response.status_code, 400)
 
@@ -97,15 +99,28 @@ class BotRequestTest(TestCase):
             'game': '',
         }
         response = client.post('/bot_request/', params)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     # join_game()
     def test_correct_joining_game(self):
         client = Client()
         params = {
+            'action': 'registration',
+            'user': 'artem10',
+            'nickname': '@sobaka10'
+        }
+        response = client.post('/bot_request/', params)
+        self.assertEqual(response.status_code, 200)
+        params = {
+            'action': 'create_game',
+            'game': 'game10',
+        }
+        response = client.post('/bot_request/', params)
+        self.assertEqual(response.status_code, 200)
+        params = {
             'action': 'join_game',
-            'user': 'artem1',
-            'game': 'game1',
+            'user': 'artem10',
+            'game': 'game10',
         }
         response = client.post('/bot_request/', params)
         self.assertEqual(response.status_code, 200)
@@ -135,10 +150,17 @@ class BotRequestTest(TestCase):
             'game': 'game228',
         }
         response = client.post('/bot_request/', params)
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 402)
 
     def test_join_game_while_playing(self):
         client = Client()
+        params = {
+            'action': 'registration',
+            'user': 'artem8',
+            'nickname': '@sobaka8'
+        }
+        response = client.post('/bot_request/', params)
+        self.assertEqual(response.status_code, 200)
         params = {
             'action': 'create_game',
             'game': 'game3',
@@ -146,9 +168,22 @@ class BotRequestTest(TestCase):
         response = client.post('/bot_request/', params)
         self.assertEqual(response.status_code, 200)
         params = {
+            'action': 'create_game',
+            'game': 'game8',
+        }
+        response = client.post('/bot_request/', params)
+        self.assertEqual(response.status_code, 200)
+        params = {
             'action': 'join_game',
-            'user': 'artem1',
+            'user': 'artem8',
             'game': 'game3',
+        }
+        response = client.post('/bot_request/', params)
+        self.assertEqual(response.status_code, 200)
+        params = {
+            'action': 'join_game',
+            'user': 'artem8',
+            'game': 'game8',
         }
         response = client.post('/bot_request/', params)
         self.assertEqual(response.status_code, 401)
@@ -157,12 +192,32 @@ class BotRequestTest(TestCase):
     def test_get_correct_game(self):
         client = Client()
         params = {
+            'action': 'registration',
+            'user': 'artem9',
+            'nickname': '@sobaka9'
+        }
+        response = client.post('/bot_request/', params)
+        self.assertEqual(response.status_code, 200)
+        params = {
+            'action': 'create_game',
+            'game': 'game9',
+        }
+        response = client.post('/bot_request/', params)
+        self.assertEqual(response.status_code, 200)
+        params = {
+            'action': 'join_game',
+            'user': 'artem9',
+            'game': 'game9',
+        }
+        response = client.post('/bot_request/', params)
+        self.assertEqual(response.status_code, 200)
+        params = {
             'action': 'get_game',
-            'user': 'artem1',
+            'user': 'artem9',
         }
         response = json.loads(client.post('/bot_request/', params).content.decode('utf-8'))
         self.assertEqual(response['error'], 'ok')
-        self.assertEqual(response['game'], 'game1')
+        self.assertEqual(response['game'], 'game9')
 
     def test_get_nonexistent_user_game(self):
         client = Client()
@@ -203,10 +258,11 @@ class BotRequestTest(TestCase):
             'action': 'get_players',
             'game': 'gameTest',
         }
-        users = json.loads(requests.post(url, params).content.decode('utf-8'))
+        users = json.loads(client.post('/bot_request/', params).content.decode('utf-8'))
         self.assertEqual(users['error'], 'ok')
         players = []
         for key in users.keys():
             if key[:4] == 'user':
                 players.append(users[key])
+        players.sort()
         self.assertEqual(players, ['art0', 'art1', 'art2'])
