@@ -41,7 +41,7 @@ def bot_request(request):
                     player = User.objects.all().filter(user=request.POST['user'])
                     if len(player) == 0:
                         return HttpResponse(status=400)
-                    if player['game'] != '':
+                    if player[0]['game'] != '':
                         return HttpResponse(status=401)
                     User.objects.all().filter(user=request.POST['user']).update(
                                                                     game=request.POST['game'],
@@ -144,6 +144,38 @@ def bot_request(request):
                     if len(game) == 0:
                         return HttpResponse(status=400)
                     GameModel.objects.all().filter(game=request.POST['game']).update(
+                        condition=request.POST['condition'])
+                    return HttpResponse(status=200)
+            elif request.POST['action'] == 'get_games_condition':
+                requirements = ['game']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    game = GameModel.objects.all().filter(game=request.POST['game'])
+                    if len(game) == 0:
+                        return JsonResponse({'error': 'no_such_game'})
+                    return JsonResponse({'error': 'ok', 'condition': game[0].condition})
+            elif request.POST['action'] == 'get_players_condition':
+                requirements = ['user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.all().filter(game=request.POST['user'])
+                    if len(user) == 0:
+                        return JsonResponse({'error': 'no_such_user'})
+                    return JsonResponse({'error': 'ok', 'condition': user[0].condition})
+            elif request.POST['action'] == 'change_players_condition':
+                requirements = ['condition', 'user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.all().filter(user=request.POST['game'])
+                    if len(user) == 0:
+                        return HttpResponse(status=400)
+                    User.objects.all().filter(game=request.POST['game']).update(
                         condition=request.POST['condition'])
                     return HttpResponse(status=200)
     return HttpResponse(status=403)
