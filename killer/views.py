@@ -162,7 +162,7 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    game = GameModel.objects.all().filter(user=request.POST['game'])
+                    game = GameModel.objects.all().filter(game=request.POST['game'])
                     if len(game) == 0:
                         return HttpResponse(status=400)
                     GameModel.objects.all().filter(game=request.POST['game']).update(
@@ -184,7 +184,7 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    user = User.objects.all().filter(game=request.POST['user'])
+                    user = User.objects.all().filter(user=request.POST['user'])
                     if len(user) == 0:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'condition': user[0].condition})
@@ -194,10 +194,23 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    user = User.objects.all().filter(user=request.POST['game'])
+                    user = User.objects.all().filter(user=request.POST['user'])
                     if len(user) == 0:
                         return HttpResponse(status=400)
-                    User.objects.all().filter(game=request.POST['game']).update(
+                    User.objects.all().filter(user=request.POST['user']).update(
                         condition=request.POST['condition'])
                     return HttpResponse(status=200)
+            elif request.POST['action'] == 'get_user_killer':
+                requirements = ['user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.all().filter(target=request.POST['user'])
+                    user1 = User.objects.all().filter(user=request.POST['user'])
+                    if len(user1) == 0:
+                        return JsonResponse({'error': 'no_such_user'})
+                    if len(user) == 0:
+                        return JsonResponse({'error': 'no_such_killer'})
+                    return JsonResponse({'error': 'ok', 'killer': user[0].user})
     return HttpResponse(status=403)
