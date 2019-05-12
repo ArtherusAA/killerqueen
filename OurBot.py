@@ -132,11 +132,38 @@ def main():
                 dbr.change_games_condition(dbr.get_game(str(last_chat_id)), 'going')
                 for i in dbr.get_players(dbr.get_game(str(last_chat_id))):
                     print(i)
-                    greet_bot.send_message(i, 'Игра начинается! Отдай этот код своему убийце, если конечно тебя убили!')
-                    code = make_game() # just generate a symbols
+                    greet_bot.send_message(i, 'Игра начинается! Вот твоя жертва: ' + dbr.get_nickname(dbr.get_user_target(i)))
+                    greet_bot.send_message(i, 'А этот код отдай своему убийце, если конечно тебя убили!')
+                    code = make_game()
+                    dbr.set_user_identifier(i, code) # just generate a symbols
                     greet_bot.send_message(i, code)
 
+            elif text[0] == '/kill' and dbr.get_games_condition(dbr.get_game(str(last_chat_id)).upper()) == 'going':
+                code = text[len(text) - 1].upper()
+                if dbr.get_user_identifier(dbr.get_user_target(str(last_chat_id))).upper() == code:
 
+
+                    died = dbr.get_user_target(str(last_chat_id))
+
+                    if str(last_chat_id) == dbr.get_user_target(died):
+                        dbr.establish_winner(str(last_chat_id), dbr.get_game(str(last_chat_id)))
+                        greet_bot.send_message(str(last_chat_id), 'Поздравляю! Обыграв остальных участиков, ты ПОБЕДИЛ!')
+                        dbr.set_target_to_user(str(last_chat_id), '')
+                        dbr.set_user_identifier(str(last_chat_id), '')
+                        dbr.change_players_condition(str(last_chat_id), 'free')
+                        dbr.leave_game(str(last_chat_id))
+                    else:
+                        dbr.set_target_to_user(str(last_chat_id), dbr.get_user_target(died))
+                        greet_bot.send_message(str(last_chat_id), 'Отлично! Ты убил очередную жертву, вот тебе следущая: ' + dbr.get_nickname(dbr.get_user_target(died))) # plus +1 kill
+
+                        dbr.set_target_to_user(died, '')
+                        dbr.set_user_identifier(died, '')
+                        dbr.change_players_condition(died, 'free')
+                        greet_bot.send_message(died, 'Тебя убили! Но ничего, в следующей игре тебе обязательно повезёт!')
+                        greet_bot.send_message(died, 'Можешь искать другую игру!')
+                        dbr.leave_game(died)
+                else:
+                    greet_bot.send_message(str(last_chat_id), 'Неверный код, проверь ещё раз')
 
 
             #except:

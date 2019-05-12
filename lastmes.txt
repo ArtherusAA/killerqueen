@@ -522,3 +522,11 @@ Jonathan /start_game
 Jonathan /leave
 Jonathan /leave
 Jonathan /join WCL-RKH-WAF-GIF
+Jonathan хай
+Участникъ полового акта /start
+Участникъ полового акта Прувет
+Участникъ полового акта Привет
+Jonathan /make_game
+Участникъ полового акта /join WQO-KRX-SAO-SVG
+Jonathan /start_game
+Jonathan /kill VQL-PUE-EHG-GYR
