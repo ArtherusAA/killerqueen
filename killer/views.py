@@ -213,4 +213,14 @@ def bot_request(request):
                     if len(user) == 0:
                         return JsonResponse({'error': 'no_such_killer'})
                     return JsonResponse({'error': 'ok', 'killer': user[0].user})
+            elif request.POST['action'] == 'get_nickname':
+                requirements = ['user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.all().filter(user=request.POST['user'])
+                    if len(user) == 0:
+                        return JsonResponse({'error': 'no_such_user'})
+                    return JsonResponse({'error': 'ok', 'nickname': user[0].nickname})
     return HttpResponse(status=403)
