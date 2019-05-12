@@ -151,7 +151,7 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    game = GameModel.objects.all().filter(user=request.POST['game'])
+                    game = GameModel.objects.all().filter(game=request.POST['game'])
                     if len(game) == 0:
                         return HttpResponse(status=400)
                     GameModel.objects.all().filter(game=request.POST['game']).update(winner=request.POST['user'])
