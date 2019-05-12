@@ -69,6 +69,16 @@ class BotRequestTest(TestCase):
         response = client.post('/bot_request/', params)
         return response
 
+    def setup_set_target_to_user(self, user, target):
+        client = Client()
+        params = {
+            'action': 'set_target_to_user',
+            'user': user,
+            'target': target,
+        }
+        response = client.post('/bot_request/', params)
+        return response
+
     # registration()
     def test_correct_registration(self):
         response = self.setup_registration('artem1', '@sobaka1')
@@ -244,4 +254,71 @@ class BotRequestTest(TestCase):
         response = self.setup_create_game('gameTest7')
         self.assertEqual(response.status_code, 200)
         response = self.setup_establish_winner('artem18', 'gameTest7')
+        self.assertEqual(response.status_code, 403)
+
+    #set_target_to_user()
+    def test_set_correct_target_to_user(self):
+        response = self.setup_registration('artem19', '@sobaka19')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_registration('artem20', '@sobaka20')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_create_game('gameTest8')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_join_game('artem19', 'gameTest8')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_join_game('artem20', 'gameTest8')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_set_target_to_user('artem19', 'artem20')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_set_target_to_user('artem20', 'artem19')
+        self.assertEqual(response.status_code, 200)
+
+    def test_set_target_to_nonexitant_user(self):
+        response = self.setup_registration('artem21', '@sobaka21')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_create_game('gameTest9')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_join_game('artem21', 'gameTest9')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_set_target_to_user('archy228', 'artem21')
+        self.assertEqual(response.status_code, 400)
+
+    def test_set_nonexitant_target_to_user(self):
+        response = self.setup_registration('artem22', '@sobaka22')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_create_game('gameTest10')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_join_game('artem22', 'gameTest10')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_set_target_to_user('artem22', 'archy228')
+        self.assertEqual(response.status_code, 403)
+
+    def test_set_outsider_target_to_user(self):
+        response = self.setup_registration('artem23', '@sobaka23')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_registration('artem24', '@sobaka24')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_create_game('gameTest11')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_create_game('gameTest12')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_join_game('artem23', 'gameTest11')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_join_game('artem24', 'gameTest12')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_set_target_to_user('artem23', 'archy24')
+        self.assertEqual(response.status_code, 403)
+        response = self.setup_set_target_to_user('artem24', 'archy23')
+        self.assertEqual(response.status_code, 403)
+
+    def test_set_target_to_nonPlaying_user(self):
+        response = self.setup_registration('artem25', '@sobaka25')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_registration('artem26', '@sobaka26')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_create_game('gameTest13')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_join_game('artem26', 'gameTest13')
+        self.assertEqual(response.status_code, 200)
+        response = self.setup_set_target_to_user('artem25', 'archy26')
         self.assertEqual(response.status_code, 403)
