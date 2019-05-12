@@ -147,3 +147,32 @@ def get_user_killer(user):
     if response['error'] == 'ok':
         return response['killer']
     return response['error']
+
+def get_nickname(user):
+    params = {
+        'action': 'get_nickname',
+        'user': user,
+    }
+    response = json.loads(requests.post(url, params).content.decode('utf-8'))
+    if response['error'] == 'ok':
+        return response['nickname']
+    return response['error']
+
+def set_user_identifier(user, user_identifier):
+    params = {
+        'action': 'set_user_identifier',
+        'user': user,
+        'user_identifier': user_identifier,
+    }
+    response = requests.post(url, params)
+    return response.status_code
+
+def get_user_identifier(user):
+    params = {
+        'action': 'get_user_identifier',
+        'user': user,
+    }
+    response = json.loads(requests.post(url, params).content.decode('utf-8'))
+    if response['error'] == 'ok':
+        return response['user_identifier']
+    return response['error']
