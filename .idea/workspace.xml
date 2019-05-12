@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8788391d-7f92-4caa-a150-89803c684b55" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/killer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/killer/views.py" afterDir="false" />
     </list>
     <ignored path="killergame.iws" />
@@ -23,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/killer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="212" column="38" lean-forward="true" selection-start-line="212" selection-start-column="38" selection-end-line="212" selection-end-column="38" />
+            <state relative-caret-position="662">
+              <caret line="245" column="39" selection-start-line="245" selection-start-column="39" selection-end-line="245" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -32,8 +33,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dbrequests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="677">
-              <caret line="157" column="33" selection-start-line="157" selection-start-column="25" selection-end-line="157" selection-end-column="33" />
+            <state relative-caret-position="525">
+              <caret line="164" column="24" selection-start-line="164" selection-start-column="9" selection-end-line="164" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -201,15 +202,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dbrequests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="677">
-          <caret line="157" column="33" selection-start-line="157" selection-start-column="25" selection-end-line="157" selection-end-column="33" />
+        <state relative-caret-position="525">
+          <caret line="164" column="24" selection-start-line="164" selection-start-column="9" selection-end-line="164" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/killer/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="212" column="38" lean-forward="true" selection-start-line="212" selection-start-column="38" selection-end-line="212" selection-end-column="38" />
+        <state relative-caret-position="662">
+          <caret line="245" column="39" selection-start-line="245" selection-start-column="39" selection-end-line="245" selection-end-column="39" />
         </state>
       </provider>
     </entry>

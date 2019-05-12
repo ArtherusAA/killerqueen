@@ -223,4 +223,26 @@ def bot_request(request):
                     if len(user) == 0:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'nickname': user[0].nickname})
+            elif request.POST['action'] == 'get_user_identifier':
+                requirements = ['user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.all().filter(user=request.POST['user'])
+                    if len(user) == 0:
+                        return JsonResponse({'error': 'no_such_user'})
+                    return JsonResponse({'error': 'ok', 'user_identifier': user[0].user_identifier})
+            elif request.POST['action'] == 'set_user_identifier':
+                requirements = ['user_identifier', 'user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.all().filter(user=request.POST['user'])
+                    if len(user) == 0:
+                        return HttpResponse(status=400)
+                    User.objects.all().filter(user=request.POST['user']).update(
+                        user_identifier=request.POST['user_identifier'])
+                    return HttpResponse(status=200)
     return HttpResponse(status=403)
