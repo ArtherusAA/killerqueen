@@ -3,6 +3,7 @@ import datetime
 import random
 from telegram import ParseMode
 import dbrequests as dbr
+from telebot import types
 
 class BotHandler:
 
@@ -20,6 +21,12 @@ class BotHandler:
     def send_message(self, chat_id, text):
         params = {'chat_id': chat_id, 'text': text}
         method = 'sendMessage'
+        resp = requests.post(self.api_url + method, params)
+        return resp
+
+    def send_photo(self, chat_id, img):
+        params = {'chat_id': chat_id, 'image': image}
+        method = 'sendPhoto'
         resp = requests.post(self.api_url + method, params)
         return resp
 
@@ -82,7 +89,6 @@ def main():
 
     while True:
         try:
-            #print('Запуск успешен')
             greet_bot.get_updates(new_offset)
             last_update = greet_bot.get_last_update()
             last_update_id = last_update['update_id']
@@ -91,13 +97,16 @@ def main():
             last_chat_name = last_update['message']['chat']['first_name']
             dbr.registration(str(last_chat_id), '@' + last_update['message']['chat']['username'])
             #print(last_update)
-    ###########################################################################
+        ###########################################################################
             text = list(last_chat_text.lower().split())
             #print(text)
-    ###########################################################################
+        ###########################################################################
+            if text[0] == '/start':
+                greet_bot.send_message(last_chat_id, '/Choose')
+
             if last_chat_name == 'Jonathan ⚡️' and text[0] == '/last_mess':
                 last_mess(last_chat_id)
-    ###########################################################################
+        ###########################################################################
             elif (text[0] == '/make_game'):
                 try:
                     if dbr.get_players_condition(str(last_chat_id) != 'playing'): # what target?
@@ -111,7 +120,7 @@ def main():
                         greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. находишься в другой игре. Доиграй или покинь её')
                 except:
                     greet_bot.send_message(last_chat_id, 'Я такое не умею, может в следующий раз')
-    ###########################################################################
+        ###########################################################################
             elif (text[0] == '/join'): # проверить существует ли такое лобби и не играют ли уже там
                 try:
                     game = text[len(text) - 1].upper()
@@ -151,6 +160,7 @@ def main():
                         dbr.set_target_to_user(str(last_chat_id), '')
                         dbr.set_user_identifier(str(last_chat_id), '')
                         dbr.change_players_condition(str(last_chat_id), 'free')
+                        dbr.change_games_condition(dbr.get_game(str(last_chat_id)), 'finish')
                         dbr.leave_game(str(last_chat_id))
                     else:
                         dbr.set_target_to_user(str(last_chat_id), dbr.get_user_target(died))
@@ -165,9 +175,6 @@ def main():
                 else:
                     greet_bot.send_message(str(last_chat_id), 'Неверный код, проверь ещё раз')
 
-
-            #except:
-            #        print('Error')
             elif text[0] == '/leave' and dbr.get_players_condition(str(last_chat_id)) == 'playing':
 
                 if dbr.get_games_condition(dbr.get_game(str(last_chat_id)).upper()) == 'wait':
@@ -190,16 +197,19 @@ def main():
                     f.close()
                 except:
                     greet_bot.send_message(last_chat_id, 'Ой ОЙ оЙ, за такое положен бан')
-    ###########################################################################
-
-            file = open('/Users/jonathan/Documents/PromProg/FInal_proj/killerqueen/lastmes.txt', 'a')
-            file.write(last_chat_name + ' ' + last_chat_text + '\n')
-            file.close()
-            print(last_chat_name, last_chat_id, last_chat_text)# View who is write && what
-            #print(last_update['message'])
-            new_offset = last_update_id + 1
         except:
             print('Error')
+
+    ###########################################################################
+
+        file = open('/Users/jonathan/Documents/PromProg/FInal_proj/killerqueen/lastmes.txt', 'a')
+        file.write(last_chat_name + ' ' + last_chat_text + '\n')
+        file.close()
+        print(last_chat_name, last_chat_id, last_chat_text)# View who is write && what
+        #print(last_update['message'])
+        new_offset = last_update_id + 1
+        #except:
+        #    print('Error')
 
 if __name__ == '__main__':
     try:
