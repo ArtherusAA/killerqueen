@@ -176,3 +176,21 @@ def get_user_identifier(user):
     if response['error'] == 'ok':
         return response['user_identifier']
     return response['error']
+
+def count_kill(user):
+    params = {
+        'action': 'count_kill',
+        'user': user,
+    }
+    response = requests.post(url, params)
+    return response.status_code
+
+def get_amount_kills(user):
+    params = {
+        'action': 'get_amount_kills',
+        'user': user,
+    }
+    response = json.loads(requests.post(url, params).content.decode('utf-8'))
+    if response['error'] == 'ok':
+        return response['kills']
+    return response['error']
