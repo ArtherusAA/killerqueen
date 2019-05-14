@@ -14,3 +14,4 @@ class User(models.Model):
     user_identifier = models.CharField(max_length=1024)
     condition = models.CharField(max_length=1024)
     nickname = models.CharField(max_length=1024)
+    kills = models.IntegerField(default=0)
