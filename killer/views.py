@@ -131,7 +131,7 @@ def bot_request(request):
                     if not checker_for_nickname:
                         return HttpResponse(status=228)
                     user = User(user=request.POST['user'], nickname=request.POST['nickname'], game='', target='',
-                                user_identifier='', condition='')
+                                user_identifier='', condition='', kills=0)
                     user.save()
                     return HttpResponse(status=200)
             elif request.POST['action'] == 'leave_game':
@@ -245,4 +245,27 @@ def bot_request(request):
                     User.objects.all().filter(user=request.POST['user']).update(
                         user_identifier=request.POST['user_identifier'])
                     return HttpResponse(status=200)
+            elif request.POST['action'] == 'count_kill':
+                requirements = ['user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.all().filter(user=request.POST['user'])
+                    if len(user) == 0:
+                        return HttpResponse(status=400)
+                    new_kills = user[0].kills + 1
+                    User.objects.all().filter(user=request.POST['user']).update(
+                        kills=new_kills)
+                    return HttpResponse(status=200)
+            elif request.POST['action'] == 'get_amount_kills':
+                requirements = ['user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.all().filter(user=request.POST['user'])
+                    if len(user) == 0:
+                        return JsonResponse({'error': 'no_such_user'})
+                    return JsonResponse({'error': 'ok', 'kills': str(user[0].kills)})
     return HttpResponse(status=403)
