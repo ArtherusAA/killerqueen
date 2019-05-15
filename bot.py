@@ -12,24 +12,21 @@ greet_bot = telebot.TeleBot(config.token)
 @greet_bot.message_handler(commands=['join'])      # join game
 def handle_start(message):
     last_chat_id = str(message.chat.id)
-    if (message.from_user.username != message.chat.username):
-        game = message.text.split()
-        print(game)
-        game = game[len(game) - 1]
-        print(game)
-        if dbr.get_players_condition(last_chat_id != 'playing') and dbr.get_games_condition(game) == 'wait':
-            greet_bot.send_message(last_chat_id, 'Отлично сейчас я добавлю тебя в лобби: ' + game)
-            dbr.join_game(last_chat_id, game)
-            dbr.change_players_condition(last_chat_id, 'playing')
-            markup = types.ReplyKeyboardMarkup()
-            markup.row('начать')
-            markup.row('пригласить')
-            markup.row('покинуть')
-            greet_bot.send_message(last_chat_id, "Меню игры", reply_markup=markup)
-        else:
-            greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. находишься в другой игре. Доиграй или покинь её')
+    game = message.text.split()
+    #print(game)
+    game = game[len(game) - 1]
+    #print(game)
+    if dbr.get_players_condition(last_chat_id != 'playing') and dbr.get_games_condition(game) == 'wait':
+        greet_bot.send_message(last_chat_id, 'Отлично сейчас я добавлю тебя в лобби: ' + game)
+        dbr.join_game(last_chat_id, game)
+        dbr.change_players_condition(last_chat_id, 'playing')
+        markup = types.ReplyKeyboardMarkup()
+        markup.row('начать')
+        markup.row('пригласить')
+        markup.row('покинуть')
+        greet_bot.send_message(last_chat_id, "Меню игры", reply_markup=markup)
     else:
-            greet_bot.send_message(last_chat_id, 'Ты переслал его сам себе!')
+        greet_bot.send_message(last_chat_id, 'Ты не можешь этого сделать, т.к. находишься в другой игре. Доиграй или покинь её')
 
 @greet_bot.message_handler(commands=['start'])        # start menu
 def handle_start(message):
@@ -79,7 +76,6 @@ def handle_start(message):
             greet_bot.send_message(last_chat_id, 'Ты покинул игру')
 
         markup = types.ReplyKeyboardMarkup()
-        markup.row('присоединиться к игре')
         markup.row('создать игру')
         greet_bot.send_message(message.chat.id, "выбирай", reply_markup=markup)
 
@@ -98,16 +94,68 @@ def handle_start(message):
 @greet_bot.message_handler(func = lambda query: query.text == 'начать')      # start game
 def handle_start(message):
     last_chat_id = str(message.chat.id)
-    if dbr.get_games_condition(dbr.get_game(str(last_chat_id)).upper()) == 'wait':
-        get_victim(dbr.get_players(dbr.get_game(last_chat_id)))
+    if dbr.get_games_condition(dbr.get_game(last_chat_id).upper()) == 'wait':
+        config.get_victim(dbr.get_players(dbr.get_game(last_chat_id)))
         dbr.change_games_condition(dbr.get_game(last_chat_id), 'going')
         for i in dbr.get_players(dbr.get_game(last_chat_id)):
             print(i)
             greet_bot.send_message(i, 'Игра начинается! Вот твоя жертва: ' + dbr.get_nickname(dbr.get_user_target(i)))
             greet_bot.send_message(i, 'А этот код отдай своему убийце, если конечно тебя убили!')
-            code = make_game()
+            code = config.make_game()
             dbr.set_user_identifier(i, code) # just generate a symbols
             greet_bot.send_message(i, code)
+
+@greet_bot.message_handler(commands=['kill'])      # join game
+def handle_start(message):
+    last_chat_id = str(message.chat.id)
+    if dbr.get_games_condition(dbr.get_game(last_chat_id).upper()) == 'going':
+        code = message.text.split()[-1].upper()
+        print(code)
+        print(dbr.get_user_target(last_chat_id))
+        if dbr.get_user_identifier(dbr.get_user_target(last_chat_id)).upper() == code:
+            died = dbr.get_user_target(last_chat_id)
+            print(dbr.get_nickname(died))
+            dbr.count_kill(last_chat_id)
+            if last_chat_id == dbr.get_user_target(died):
+                dbr.establish_winner(last_chat_id, dbr.get_game(last_chat_id))
+                greet_bot.send_message(last_chat_id, 'Поздравляю! Обыграв остальных участиков, ты ПОБЕДИЛ!')
+                greet_bot.send_message(last_chat_id, 'Колличество твоих убийств на данный момент: ' + str(dbr.get_amount_kills(last_chat_id)))
+                dbr.set_target_to_user(last_chat_id, '')
+                dbr.set_user_identifier(last_chat_id, '')
+                dbr.change_players_condition(last_chat_id, 'free')
+                dbr.change_games_condition(dbr.get_game(last_chat_id), 'finish')
+                dbr.leave_game(last_chat_id)
+                markup = types.ReplyKeyboardMarkup()
+                markup.row('создать игру')
+                greet_bot.send_message(message.chat.id, "выбирай", reply_markup=markup)
+
+                print(dbr.set_target_to_user(died, ''))
+                print(dbr.set_user_identifier(died, ''))
+                print(dbr.change_players_condition(died, 'free'))
+                greet_bot.send_message(died, 'Тебя убили! Но ничего, в следующей игре тебе обязательно повезёт!')
+                greet_bot.send_message(died, 'Можешь искать другую игру!')
+                dbr.leave_game(died)
+                markup = types.ReplyKeyboardMarkup()
+                markup.row('создать игру')
+                greet_bot.send_message(died, "выбирай", reply_markup=markup)
+
+            else:
+                dbr.set_target_to_user(last_chat_id, dbr.get_user_target(died))
+                greet_bot.send_message(last_chat_id, 'Отлично! Ты убил очередную жертву, вот тебе следущая: ' + dbr.get_nickname(dbr.get_user_target(died))) # plus +1 kill
+                print(dbr.set_target_to_user(died, ''))
+                print(dbr.set_user_identifier(died, ''))
+                print(dbr.change_players_condition(died, 'free'))
+                greet_bot.send_message(died, 'Тебя убили! Но ничего, в следующей игре тебе обязательно повезёт!')
+                greet_bot.send_message(last_chat_id, 'Колличество твоих убийств на данный момент: ' + dbr.get_amount_kills(last_chat_id))
+                greet_bot.send_message(died, 'Можешь искать другую игру!')
+                dbr.leave_game(died)
+                markup = types.ReplyKeyboardMarkup()
+                markup.row('создать игру')
+                greet_bot.send_message(died, "выбирай", reply_markup=markup)
+        else:
+            greet_bot.send_message(last_chat_id, 'Неверный код, проверь ещё раз')
+    else:
+        greet_bot.send_message(last_chat_id, 'Ты не можешь этого сейчас сделать')
 
 
 
