@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'input_error/$', views.input_error, name='input_error'),
     url(r'login/$', auth_views.LoginView.as_view(), name='login'),
     url(r'signup/$', views.signup, name='signup'),
+    url(r'bot_request/$', views.bot_request, name='bot_request')
 ]

@@ -20,12 +20,12 @@
     </tr>
   </thead>
   <tbody>
-    {% for artist in users %}
+    {% for user in users %}
     <tr class='success'>
-        <td>{{ artist.id }}</td>
-        <td>{{ artist.name }}</td>
-        <td>{{ artist.kills }}</td>
-        <td>{{ artist.wins }}</td>
+        <td>{{ user.id }}</td>
+        <td>{{ user.nickname }}</td>
+        <td>{{ user.kills }}</td>
+        <td>{{ user.wins }}</td>
     </tr>
     {% endfor %}
   </tbody>

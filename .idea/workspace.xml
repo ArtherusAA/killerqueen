@@ -2,14 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b89140b9-1d1f-414d-881a-8615a7a7f1d3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/killer/data_base_control.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/killer/DataBaseControl.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/killer/data_base_control.py" beforeDir="false" afterPath="$PROJECT_DIR$/killer/data_base_control.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/killer/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/killer/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/killer/templates/score_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/killer/templates/score_admin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/killer/templates/scoreboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/killer/templates/scoreboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/killer/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/killer/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/killer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/killer/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/killergame/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/killergame/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/killergame/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/killergame/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/.idea/killergame.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/Jesus.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/OurBot.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killer/DataBaseControl.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killer/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killer/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killer/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killer/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killer/migrations/0002_auto_20190406_1930.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killer/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killer/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killer/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killer/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killergame/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killergame/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killergame/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/killergame/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/lastmes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/manage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../killergame/scoreboard.sqlite3" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,20 +61,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/killergame/settings.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/killer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="545">
-              <caret line="125" column="24" selection-start-line="125" selection-start-column="24" selection-end-line="125" selection-end-column="24" />
+            <state relative-caret-position="3116">
+              <caret line="350" column="37" selection-start-line="350" selection-start-column="31" selection-end-line="350" selection-end-column="37" />
+              <folding>
+                <element signature="e#16#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/killer/templates/scoreboard.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="589">
+              <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/killer/tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="11" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/killer/apps.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/killergame/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="570">
+              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
               <folding>
                 <element signature="e#634#666#0" expanded="true" />
               </folding>
@@ -55,67 +112,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/killer/views.py">
+        <entry file="file://$PROJECT_DIR$/killergame/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="24" column="18" lean-forward="true" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-              <folding>
-                <element signature="e#16#51#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1083">
+              <caret line="120" column="23" selection-start-line="120" selection-start-column="23" selection-end-line="120" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/killer/templates/registration/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="15" selection-start-column="15" selection-end-column="15" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/killer/templates/registration/signup.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/killer/data_base_control.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/killer/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="12" column="20" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/killer/templates/inputerror.html">
+        <entry file="file://$PROJECT_DIR$/killergame/wsgi.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="304">
-              <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#226#235#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/killer/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="14" column="49" lean-forward="true" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -123,8 +144,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/killer/templates/score_admin.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+            <state relative-caret-position="151">
+              <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="77" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -146,31 +167,32 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/killer/models.py" />
         <option value="$PROJECT_DIR$/cvxcv.js" />
-        <option value="$PROJECT_DIR$/killer/templates/scoreboard.html" />
         <option value="$PROJECT_DIR$/killer/forms.py" />
         <option value="$PROJECT_DIR$/killer/templates/inputerror.html" />
-        <option value="$PROJECT_DIR$/killer/templates/score_admin.html" />
         <option value="$PROJECT_DIR$/killer/DataBaseControl.py" />
-        <option value="$PROJECT_DIR$/killer/data_base_control.py" />
         <option value="$PROJECT_DIR$/killer/templates/registration/signup.html" />
-        <option value="$PROJECT_DIR$/killer/views.py" />
         <option value="$PROJECT_DIR$/killer/templates/registration/login.html" />
+        <option value="$PROJECT_DIR$/killer/data_base_control.py" />
         <option value="$PROJECT_DIR$/killergame/urls.py" />
         <option value="$PROJECT_DIR$/killergame/settings.py" />
+        <option value="$PROJECT_DIR$/killer/tests.py" />
+        <option value="$PROJECT_DIR$/killer/views.py" />
+        <option value="$PROJECT_DIR$/killer/models.py" />
+        <option value="$PROJECT_DIR$/killer/templates/score_admin.html" />
+        <option value="$PROJECT_DIR$/killer/templates/scoreboard.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="950" />
-    <option name="width" value="980" />
-    <option name="height" value="1040" />
+    <option name="x" value="-8" />
+    <option name="width" value="1065" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -182,30 +204,23 @@
         <subPane>
           <expand>
             <path>
-              <item name="killergame" type="b2602c69:ProjectViewProjectNode" />
-              <item name="killergame" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="killergame" type="b2602c69:ProjectViewProjectNode" />
-              <item name="killergame" type="462c0819:PsiDirectoryNode" />
+              <item name="killer" type="b2602c69:ProjectViewProjectNode" />
               <item name="killer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="killergame" type="b2602c69:ProjectViewProjectNode" />
-              <item name="killergame" type="462c0819:PsiDirectoryNode" />
+              <item name="killer" type="b2602c69:ProjectViewProjectNode" />
               <item name="killer" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="killer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="killergame" type="b2602c69:ProjectViewProjectNode" />
-              <item name="killergame" type="462c0819:PsiDirectoryNode" />
+              <item name="killer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="killer" type="462c0819:PsiDirectoryNode" />
               <item name="killer" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="registration" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="killergame" type="b2602c69:ProjectViewProjectNode" />
-              <item name="killergame" type="462c0819:PsiDirectoryNode" />
+              <item name="killer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="killer" type="462c0819:PsiDirectoryNode" />
               <item name="killergame" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -233,6 +248,49 @@
       </list>
     </option>
   </component>
+  <component name="RunManager" selected="Python tests.Unittests for tests.BotRequestTest.test_correct_registration">
+    <configuration name="Unittests for tests.BotRequestTest.test_correct_registration" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="killergame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/killer" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.BotRequestTest.test_correct_registration&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="killergame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/killer" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_pattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.BotRequestTest.test_correct_registration&quot;" />
+      <option name="_new_targetType" value="&quot;CUSTOM&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python tests.Unittests" />
+      <item itemvalue="Python tests.Unittests for tests.BotRequestTest.test_correct_registration" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Unittests for tests.BotRequestTest.test_correct_registration" />
+        <item itemvalue="Python tests.Unittests" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -246,22 +304,32 @@
       <workItem from="1556986282763" duration="4415000" />
       <workItem from="1557043811455" duration="1380000" />
       <workItem from="1557590670109" duration="4363000" />
+      <workItem from="1558188869091" duration="736000" />
+      <workItem from="1558190488918" duration="1907000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="Unittests_for_tests_BotRequestTest_test_correct_registration - 2019.05.18 at 17h 54m 36s.xml">
+      <configuration name="Unittests for tests.BotRequestTest.test_correct_registration" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_tests_BotRequestTest_test_correct_registration - 2019.05.18 at 17h 55m 12s.xml">
+      <configuration name="Unittests for tests.BotRequestTest.test_correct_registration" configurationId="tests" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10158000" />
+    <option name="totallyTimeSpent" value="12801000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2600536" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11997319" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32904148" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32956153" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -282,6 +350,9 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/killer$Unittests_for_tests_BotRequestTest_test_correct_registration.coverage" NAME="Unittests for tests.BotRequestTest.test_correct_registration Coverage Results" MODIFIED="1558191311119" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/killer" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Jesus.txt">
       <provider selected="true" editor-type-id="text-editor" />
@@ -295,24 +366,7 @@
     <entry file="file://$PROJECT_DIR$/killer/migrations/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/killer/apps.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/killer/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cvxcv.js" />
-    <entry file="file://$PROJECT_DIR$/killer/templates/scoreboard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db.sqlite3">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
@@ -327,13 +381,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/killer/admin.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/killer/templates/score_admin.html">
+    <entry file="file://$PROJECT_DIR$/killer/templates/registration/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+        <state>
+          <caret column="15" selection-start-column="15" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/killer/templates/registration/signup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/killer/data_base_control.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
         </state>
       </provider>
     </entry>
@@ -347,64 +412,84 @@
     <entry file="file://$PROJECT_DIR$/killer/templates/inputerror.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
-          <caret line="16" column="7" lean-forward="true" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
           <folding>
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/killer/data_base_control.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/killer/admin.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/killer/templates/registration/signup.html">
+    <entry file="file://$PROJECT_DIR$/killergame/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
+        <state relative-caret-position="304">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
           <folding>
-            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/killer/templates/registration/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="15" selection-start-column="15" selection-end-column="15" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/killer/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="24" column="18" lean-forward="true" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#16#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/killergame/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#634#666#0" expanded="true" />
+            <element signature="e#226#235#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/killergame/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="125" column="24" selection-start-line="125" selection-start-column="24" selection-end-line="125" selection-end-column="24" />
+        <state relative-caret-position="1083">
+          <caret line="120" column="23" selection-start-line="120" selection-start-column="23" selection-end-line="120" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/killergame/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="e#634#666#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/killer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3116">
+          <caret line="350" column="37" selection-start-line="350" selection-start-column="31" selection-end-line="350" selection-end-column="37" />
+          <folding>
+            <element signature="e#16#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/killer/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="49" lean-forward="true" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/killer/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/killer/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="11" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/killer/templates/score_admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="77" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/killer/templates/scoreboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
         </state>
       </provider>
     </entry>
