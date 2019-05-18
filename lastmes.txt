@@ -21,3 +21,8 @@ Archy /Choose
 Archy создать игру
 Archy создать игру
 Archy Hi
+Archy /start
+Archy создать игру
+Archy создать игру
+Archy создать игру
+Archy /make_game
