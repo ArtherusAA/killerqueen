@@ -60,7 +60,7 @@ def hello(last_chat_id, last_chat_name, last_chat_text, hour):
         #today += 1
 
 def last_mess(last_chat_id):
-    f = open('/Users/jonathan/Documents/PromProg/FInal_proj/killerqueen/lastmes.txt', 'r')
+    f = open('lastmes.txt', 'r')
     ans = f.read()
     greet_bot.send_message(last_chat_id, ans[len(ans) - 100:])
     f.close()
@@ -191,7 +191,7 @@ def main():
 
             elif text[0] == '/jesus':
                 try:
-                    f = open('/Users/jonathan/Documents/PromProg/FInal_proj/killergame/Jesus.txt', 'r')
+                    f = open('Jesus.txt', 'r')
                     jesus = f.read()
                     greet_bot.send_message(last_chat_id, jesus)
                     f.close()
@@ -202,7 +202,7 @@ def main():
 
     ###########################################################################
 
-        file = open('/Users/jonathan/Documents/PromProg/FInal_proj/killerqueen/lastmes.txt', 'a')
+        file = open('lastmes.txt', 'a')
         file.write(last_chat_name + ' ' + last_chat_text + '\n')
         file.close()
         print(last_chat_name, last_chat_id, last_chat_text)# View who is write && what
