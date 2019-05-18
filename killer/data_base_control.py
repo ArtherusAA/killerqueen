@@ -9,7 +9,7 @@ def add_user(name):
     User-adding function
     """
     if not User.objects.filter(nickname=name):
-        user = User(nickname=name, kills=0)
+        user = User(user=name, nickname='@'+name, kills=0)
         user.save()
 
 
