@@ -194,3 +194,21 @@ def get_amount_kills(user):
     if response['error'] == 'ok':
         return response['kills']
     return response['error']
+
+def count_wins(user):
+    params = {
+        'action': 'count_wins',
+        'user': user,
+    }
+    response = requests.post(url, params)
+    return response.status_code
+
+def get_amount_wins(user):
+    params = {
+        'action': 'get_amount_wins',
+        'user': user,
+    }
+    response = json.loads(requests.post(url, params).content.decode('utf-8'))
+    if response['error'] == 'ok':
+        return response['wins']
+    return response['error']
