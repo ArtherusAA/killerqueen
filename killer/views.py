@@ -373,4 +373,27 @@ def bot_request(request):
                     if len(user) == 0:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'kills': str(user[0].kills)})
+            elif request.POST['action'] == 'count_wins':
+                requirements = ['user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.all().filter(user=request.POST['user'])
+                    if len(user) == 0:
+                        return HttpResponse(status=400)
+                    new_wins = user[0].wins + 1
+                    User.objects.all().filter(user=request.POST['user']).update(
+                        kills=new_wins)
+                    return HttpResponse(status=200)
+            elif request.POST['action'] == 'get_amount_wins':
+                requirements = ['user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.all().filter(user=request.POST['user'])
+                    if len(user) == 0:
+                        return JsonResponse({'error': 'no_such_user'})
+                    return JsonResponse({'error': 'ok', 'wins': str(user[0].wins)})
     return HttpResponse(status=403)
