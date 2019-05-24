@@ -16,3 +16,6 @@ class User(models.Model):
     nickname = models.CharField(max_length=1024)
     kills = models.IntegerField(default=0)
     wins = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['-kills']

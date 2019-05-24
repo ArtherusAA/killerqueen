@@ -17,6 +17,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 import killer.data_base_control as dbc
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import user_passes_test
 
 
 def signup(request):
@@ -30,6 +31,7 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
+@login_required(login_url='/login')
 def exit(request):
     logout(request)
     return redirect('/')
@@ -49,11 +51,13 @@ def score(request):
     """
     context = {}
     users = User.objects.all()
+    current_user = request.user
+    context['username'] = current_user
     context['users'] = users
     return render(request, "scoreboard.html", context)
 
 
-@login_required(login_url='/login')
+@user_passes_test(lambda u: u.is_superuser)
 def change_kills(request):
     """
     change_kills-view
@@ -68,7 +72,7 @@ def change_kills(request):
     return redirect('admin')
 
 
-@login_required(login_url='/login')
+@user_passes_test(lambda u: u.is_superuser)
 def change_wins(request):
     """
     change_wins-view
@@ -83,7 +87,7 @@ def change_wins(request):
     return redirect('admin')
 
 
-@login_required(login_url='/login')
+@user_passes_test(lambda u: u.is_superuser)
 def add_user(request):
     """
     add_user-view
@@ -95,7 +99,7 @@ def add_user(request):
     return redirect('admin')
 
 
-@login_required(login_url='/login')
+@user_passes_test(lambda u: u.is_superuser)
 def score_admin(request):
     """
     control-view
@@ -109,6 +113,8 @@ def score_admin(request):
     context['add_form'] = add_form
     context['kills_form'] = kills_form
     context['wins_form'] = wins_form
+    current_user = request.user
+    context['username'] = current_user
     return render(request, "score_admin.html", context)
 
 
