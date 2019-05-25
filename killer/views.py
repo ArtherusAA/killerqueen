@@ -174,6 +174,8 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
+                    if len(GameModel.objects.all().filter(game=request.POST['game'])) == 0:
+                        return JsonResponse({'error': 'no_such_game'})
                     users = User.objects.all().filter(game=request.POST['game'])
                     if len(users) == 0:
                         return JsonResponse({'error': 'no_such_users'})
@@ -203,6 +205,12 @@ def bot_request(request):
                     player = User.objects.all().filter(user=request.POST['user'])
                     if len(player) == 0:
                         return HttpResponse(status=400)
+                    if player[0].game == '':
+                        return HttpResponse(status=401)
+                    if len(User.objects.all().filter(user=request.POST['target'])) == 0:
+                        return HttpResponse(status=228)
+                    if player[0].game != User.objects.all().filter(user=request.POST['target'])[0].game:
+                        return HttpResponse(status=402)
                     User.objects.all().filter(user=request.POST['user']).update(target=request.POST['target'])
                     return HttpResponse(status=200)
             elif request.POST['action'] == 'get_user_target':
@@ -254,6 +262,8 @@ def bot_request(request):
                     player = User.objects.all().filter(user=request.POST['user'])
                     if len(player) == 0:
                         return HttpResponse(status=400)
+                    if player[0].game == '':
+                        return HttpResponse(status=400)
                     User.objects.all().filter(user=request.POST['user']).update(game='', target='', condition='')
                     return HttpResponse(status=200)
             elif request.POST['action'] == 'establish_winner':
@@ -265,6 +275,8 @@ def bot_request(request):
                     game = GameModel.objects.all().filter(game=request.POST['game'])
                     if len(game) == 0:
                         return HttpResponse(status=400)
+                    if len(User.objects.all().filter(user=request.POST['user'])) == 0:
+                        return HttpResponse(status=401)
                     GameModel.objects.all().filter(game=request.POST['game']).update(winner=request.POST['user'])
                     return HttpResponse(status=200)
             elif request.POST['action'] == 'change_games_condition':
