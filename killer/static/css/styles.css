@@ -1,0 +1,25 @@
+.navb{
+    font-family: 'Roboto Slab', serif;
+    position: sticky;
+    top: 0;
+    z-index: 1071;
+}
+
+.nav-link{
+    color: white;
+    font-size: 25px;
+    padding: .5rem 5rem !important;
+}
+
+.voteform{
+    padding: 2rem 15rem 2rem 15rem !important;
+    margin-top: 2rem;
+}
+
+.custom-control{
+    height: calc(3rem + 2px) !important;
+}
+
+.text-r{
+    font-family: 'Roboto Slab', serif;
+}

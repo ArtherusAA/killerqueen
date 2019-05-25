@@ -1,2 +1,5 @@
 .idea
 __pycache__
+killer/__pycache__
+.DS_Store
+killer/.DS_Store

@@ -17,6 +17,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 import killer.data_base_control as dbc
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import user_passes_test
 
 
 def signup(request):
@@ -30,6 +31,7 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 
+@login_required(login_url='/login')
 def exit(request):
     logout(request)
     return redirect('/')
@@ -49,11 +51,13 @@ def score(request):
     """
     context = {}
     users = User.objects.all()
+    current_user = request.user
+    context['username'] = current_user
     context['users'] = users
     return render(request, "scoreboard.html", context)
 
 
-@login_required(login_url='/login')
+@user_passes_test(lambda u: u.is_superuser)
 def change_kills(request):
     """
     change_kills-view
@@ -68,7 +72,7 @@ def change_kills(request):
     return redirect('admin')
 
 
-@login_required(login_url='/login')
+@user_passes_test(lambda u: u.is_superuser)
 def change_wins(request):
     """
     change_wins-view
@@ -83,7 +87,7 @@ def change_wins(request):
     return redirect('admin')
 
 
-@login_required(login_url='/login')
+@user_passes_test(lambda u: u.is_superuser)
 def add_user(request):
     """
     add_user-view
@@ -95,7 +99,7 @@ def add_user(request):
     return redirect('admin')
 
 
-@login_required(login_url='/login')
+@user_passes_test(lambda u: u.is_superuser)
 def score_admin(request):
     """
     control-view
@@ -109,6 +113,8 @@ def score_admin(request):
     context['add_form'] = add_form
     context['kills_form'] = kills_form
     context['wins_form'] = wins_form
+    current_user = request.user
+    context['username'] = current_user
     return render(request, "score_admin.html", context)
 
 
@@ -373,4 +379,27 @@ def bot_request(request):
                     if len(user) == 0:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'kills': str(user[0].kills)})
+            elif request.POST['action'] == 'count_wins':
+                requirements = ['user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.all().filter(user=request.POST['user'])
+                    if len(user) == 0:
+                        return HttpResponse(status=400)
+                    new_wins = user[0].wins + 1
+                    User.objects.all().filter(user=request.POST['user']).update(
+                        wins=new_wins)
+                    return HttpResponse(status=200)
+            elif request.POST['action'] == 'get_amount_wins':
+                requirements = ['user']
+                checker = True
+                for req in requirements:
+                    checker = (checker and req in request.POST.keys())
+                if checker:
+                    user = User.objects.all().filter(user=request.POST['user'])
+                    if len(user) == 0:
+                        return JsonResponse({'error': 'no_such_user'})
+                    return JsonResponse({'error': 'ok', 'wins': str(user[0].wins)})
     return HttpResponse(status=403)

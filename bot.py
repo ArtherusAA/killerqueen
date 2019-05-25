@@ -21,12 +21,15 @@ def winner(last_chat_id):
     dbr.leave_game(last_chat_id)
     markup = types.ReplyKeyboardMarkup()
     markup.row('создать игру')
-    greet_bot.send_message(message.chat.id, "выбирай", reply_markup=markup)
+    greet_bot.send_message(last_chat_id, "выбирай", reply_markup=markup)
 
 def kill(died):
     greet_bot.send_message(died, 'Тебя убили! Но ничего, в следующей игре тебе обязательно повезёт!')
     greet_bot.send_message(died, 'Можешь искать другую игру!')
     dbr.leave_game(died)
+    dbr.set_target_to_user(died, '')
+    dbr.set_user_identifier(died, '')
+    dbr.change_players_condition(died, 'free')
     markup = types.ReplyKeyboardMarkup()
     markup.row('создать игру')
     greet_bot.send_message(died, "выбирай", reply_markup=markup)
@@ -49,7 +52,6 @@ def handle_start(message):
                 greet_bot.send_message(i, 'К игре подключился: ' + dbr.get_nickname(last_chat_id))
 
         markup = types.ReplyKeyboardMarkup()
-        markup.row('начать')
         markup.row('пригласить')
         markup.row('покинуть')
         greet_bot.send_message(last_chat_id, "Меню игры", reply_markup=markup)
@@ -147,7 +149,7 @@ def handle_start(message):
     last_chat_id = str(message.chat.id)
     if dbr.get_games_condition(dbr.get_game(last_chat_id).upper()) == 'going':
         code = message.text.split()[-1].upper()
-        print(code)
+        print(code, dbr.get_user_identifier(dbr.get_user_target(last_chat_id)).upper())
         print(dbr.get_user_target(last_chat_id))
         if dbr.get_user_identifier(dbr.get_user_target(last_chat_id)).upper() == code:
             died = dbr.get_user_target(last_chat_id)
@@ -161,21 +163,24 @@ def handle_start(message):
 
                 if (dbr.get_amount_kills(last_chat_id) > dbr.get_amount_kills(dbr.get_user_target(died))):
                     winner(last_chat_id)
-                    kill(dbr.get_user_target(died))
+                    kill(dbr.get_user_killer(last_chat_id))
+                    kill(died)
 
                 if (dbr.get_amount_kills(last_chat_id) == dbr.get_amount_kills(dbr.get_user_target(died))):
                     winner(last_chat_id)
-                    winner(dbr.get_user_target(died))
+                    winner(dbr.get_user_killer(last_chat_id))
+                    kill(died)
 
                 if (dbr.get_amount_kills(last_chat_id) < dbr.get_amount_kills(died)):
-                    winner(dbr.get_user_target(died))
+                    winner(dbr.get_user_killer(last_chat_id))
                     kill(last_chat_id)
+                    kill(died)
             else:
                 greet_bot.send_message(last_chat_id, 'Отлично! Ты убил очередную жертву, вот тебе следущая: ' + dbr.get_nickname(dbr.get_user_target(died))) # plus +1 kill
                 # print(dbr.set_target_to_user(died, ''))
                 # print(dbr.set_user_identifier(died, ''))
                 # print(dbr.change_players_condition(died, 'free'))
-            kill(died)
+                kill(died)
         else:
             greet_bot.send_message(last_chat_id, 'Неверный код, проверь ещё раз')
     else:
