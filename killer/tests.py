@@ -168,12 +168,6 @@ class BotRequestTest(TestCase):
         response = self.setup_get_game('omg')
         self.assertEqual(response['error'], 'no_such_user')
 
-    def test_get_game_nonPlaying_user(self):
-        response = self.setup_registration('artem11', '@sobaka11')
-        self.assertEqual(response.status_code, 200)
-        response = self.setup_get_game('artem11')
-        self.assertEqual(response['error'], 'no_such_game')
-
     # get_players()
 
     def test_correct_get_players(self):
@@ -223,7 +217,7 @@ class BotRequestTest(TestCase):
         response = self.setup_registration('artem14', '@sobaka14')
         self.assertEqual(response.status_code, 200)
         response = self.setup_leave_game('artem14')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     #establish_winner()
     def test_correct_establish_winner(self):
@@ -242,19 +236,11 @@ class BotRequestTest(TestCase):
         response = self.setup_establish_winner('artem16', 'gameTest5')
         self.assertEqual(response.status_code, 400)
 
-    def test_establish_winner_nonPlaying_user(self):
-        response = self.setup_registration('artem17', '@sobaka17')
-        self.assertEqual(response.status_code, 200)
-        response = self.setup_create_game('gameTest6')
-        self.assertEqual(response.status_code, 200)
-        response = self.setup_establish_winner('artem17', 'gameTest6')
-        self.assertEqual(response.status_code, 403)
-
     def test_establish_winner_nonexitant_user(self):
         response = self.setup_create_game('gameTest7')
         self.assertEqual(response.status_code, 200)
         response = self.setup_establish_winner('artem18', 'gameTest7')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
 
     #set_target_to_user()
     def test_set_correct_target_to_user(self):
@@ -291,7 +277,7 @@ class BotRequestTest(TestCase):
         response = self.setup_join_game('artem22', 'gameTest10')
         self.assertEqual(response.status_code, 200)
         response = self.setup_set_target_to_user('artem22', 'archy228')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 228)
 
     def test_set_outsider_target_to_user(self):
         response = self.setup_registration('artem23', '@sobaka23')
@@ -306,10 +292,10 @@ class BotRequestTest(TestCase):
         self.assertEqual(response.status_code, 200)
         response = self.setup_join_game('artem24', 'gameTest12')
         self.assertEqual(response.status_code, 200)
-        response = self.setup_set_target_to_user('artem23', 'archy24')
-        self.assertEqual(response.status_code, 403)
-        response = self.setup_set_target_to_user('artem24', 'archy23')
-        self.assertEqual(response.status_code, 403)
+        response = self.setup_set_target_to_user('artem23', 'artem24')
+        self.assertEqual(response.status_code, 402)
+        response = self.setup_set_target_to_user('artem24', 'artem23')
+        self.assertEqual(response.status_code, 402)
 
     def test_set_target_to_nonPlaying_user(self):
         response = self.setup_registration('artem25', '@sobaka25')
@@ -321,4 +307,4 @@ class BotRequestTest(TestCase):
         response = self.setup_join_game('artem26', 'gameTest13')
         self.assertEqual(response.status_code, 200)
         response = self.setup_set_target_to_user('artem25', 'archy26')
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 401)
