@@ -263,7 +263,7 @@ def bot_request(request):
                     if len(player) == 0:
                         return HttpResponse(status=400)
                     if player[0].game == '':
-                        return HttpResponse(status=400)
+                        return HttpResponse(status=401)
                     User.objects.all().filter(user=request.POST['user']).update(game='', target='', condition='')
                     return HttpResponse(status=200)
             elif request.POST['action'] == 'establish_winner':
