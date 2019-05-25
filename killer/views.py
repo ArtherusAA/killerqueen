@@ -384,7 +384,7 @@ def bot_request(request):
                         return HttpResponse(status=400)
                     new_wins = user[0].wins + 1
                     User.objects.all().filter(user=request.POST['user']).update(
-                        kills=new_wins)
+                        wins=new_wins)
                     return HttpResponse(status=200)
             elif request.POST['action'] == 'get_amount_wins':
                 requirements = ['user']
