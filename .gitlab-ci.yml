@@ -20,7 +20,7 @@ testing:
 pylint:
   stage: style
   script:
-    - pylint -j 0  --ignore=tests.py, killer/apps.py, killer/admin.py --load-plugins=pylint_django killer
+    - pylint-fail-under -j 0  --ignore=tests.py, killer/apps.py, killer/admin.py --load-plugins=pylint_django  --fail_under 9.0 killer
 pep8:
   stage: style
   script:
