@@ -1,6 +1,7 @@
 import json
 from django.test import TestCase, Client
 
+
 class BotRequestTest(TestCase):
 
     def setup_registration(self, user, nickname):
@@ -38,7 +39,8 @@ class BotRequestTest(TestCase):
             'action': 'get_game',
             'user': user,
         }
-        response = json.loads(client.post('/bot_request/', params).content.decode('utf-8'))
+        response = json.loads(client.post(
+            '/bot_request/', params).content.decode('utf-8'))
         return response
 
     def setup_get_players(self, game):
@@ -47,7 +49,8 @@ class BotRequestTest(TestCase):
             'action': 'get_players',
             'game': game,
         }
-        users = json.loads(client.post('/bot_request/', params).content.decode('utf-8'))
+        users = json.loads(client.post(
+            '/bot_request/', params).content.decode('utf-8'))
         return users
 
     def setup_leave_game(self, user):
@@ -198,7 +201,6 @@ class BotRequestTest(TestCase):
         response = self.setup_get_players('gameTest2')
         self.assertEqual(response['error'], 'no_such_game')
 
-    #leave_game()
     def test_correct_leave_game(self):
         response = self.setup_registration('artem12', '@sobaka12')
         self.assertEqual(response.status_code, 200)
@@ -219,7 +221,6 @@ class BotRequestTest(TestCase):
         response = self.setup_leave_game('artem14')
         self.assertEqual(response.status_code, 401)
 
-    #establish_winner()
     def test_correct_establish_winner(self):
         response = self.setup_registration('artem15', '@sobaka15')
         self.assertEqual(response.status_code, 200)
@@ -242,7 +243,6 @@ class BotRequestTest(TestCase):
         response = self.setup_establish_winner('artem18', 'gameTest7')
         self.assertEqual(response.status_code, 401)
 
-    #set_target_to_user()
     def test_set_correct_target_to_user(self):
         response = self.setup_registration('artem19', '@sobaka19')
         self.assertEqual(response.status_code, 200)

@@ -19,6 +19,7 @@ def get_players(game):
         return players
     return users['error']
 
+
 def get_game(user):
     params = {
         'action': 'get_game',
@@ -29,6 +30,7 @@ def get_game(user):
         return game['game']
     return game['error']
 
+
 def join_game(user, game):
     params = {
         'action': 'join_game',
@@ -38,6 +40,7 @@ def join_game(user, game):
     response = requests.post(url, params)
     return response.status_code
 
+
 def create_game(game):
     params = {
         'action': 'create_game',
@@ -45,6 +48,7 @@ def create_game(game):
     }
     response = requests.post(url, params)
     return response.status_code
+
 
 def remove_player_from_game(game, user):
     params = {
@@ -55,6 +59,7 @@ def remove_player_from_game(game, user):
     response = requests.post(url, params)
     return response.status_code
 
+
 def set_target_to_user(user, target):
     params = {
         'action': 'set_target_to_user',
@@ -63,6 +68,7 @@ def set_target_to_user(user, target):
     }
     response = requests.post(url, params)
     return response.status_code
+
 
 def get_user_target(user):
     params = {
@@ -74,6 +80,7 @@ def get_user_target(user):
         return target['target']
     return target['error']
 
+
 def registration(user, nickname):
     params = {
         'action': 'registration',
@@ -83,6 +90,7 @@ def registration(user, nickname):
     response = requests.post(url, params)
     return response.status_code
 
+
 def leave_game(user):
     params = {
         'action': 'leave_game',
@@ -90,6 +98,7 @@ def leave_game(user):
     }
     response = requests.post(url, params)
     return response.status_code
+
 
 def establish_winner(user, game):
     params = {
@@ -100,6 +109,7 @@ def establish_winner(user, game):
     response = requests.post(url, params)
     return response.status_code
 
+
 def change_games_condition(game, condition):
     params = {
         'action': 'change_games_condition',
@@ -108,6 +118,7 @@ def change_games_condition(game, condition):
     }
     response = requests.post(url, params)
     return response.status_code
+
 
 def get_games_condition(game):
     params = {
@@ -119,6 +130,7 @@ def get_games_condition(game):
         return condition['condition']
     return condition['error']
 
+
 def change_players_condition(user, condition):
     params = {
         'action': 'change_players_condition',
@@ -127,6 +139,7 @@ def change_players_condition(user, condition):
     }
     response = requests.post(url, params)
     return response.status_code
+
 
 def get_players_condition(user):
     params = {
@@ -138,6 +151,7 @@ def get_players_condition(user):
         return condition['condition']
     return condition['error']
 
+
 def get_user_killer(user):
     params = {
         'action': 'get_user_killer',
@@ -147,6 +161,7 @@ def get_user_killer(user):
     if response['error'] == 'ok':
         return response['killer']
     return response['error']
+
 
 def get_nickname(user):
     params = {
@@ -158,6 +173,7 @@ def get_nickname(user):
         return response['nickname']
     return response['error']
 
+
 def set_user_identifier(user, user_identifier):
     params = {
         'action': 'set_user_identifier',
@@ -166,6 +182,7 @@ def set_user_identifier(user, user_identifier):
     }
     response = requests.post(url, params)
     return response.status_code
+
 
 def get_user_identifier(user):
     params = {
@@ -177,6 +194,7 @@ def get_user_identifier(user):
         return response['user_identifier']
     return response['error']
 
+
 def count_kill(user):
     params = {
         'action': 'count_kill',
@@ -184,6 +202,7 @@ def count_kill(user):
     }
     response = requests.post(url, params)
     return response.status_code
+
 
 def get_amount_kills(user):
     params = {
@@ -195,6 +214,7 @@ def get_amount_kills(user):
         return response['kills']
     return response['error']
 
+
 def count_wins(user):
     params = {
         'action': 'count_wins',
@@ -202,6 +222,7 @@ def count_wins(user):
     }
     response = requests.post(url, params)
     return response.status_code
+
 
 def get_amount_wins(user):
     params = {
