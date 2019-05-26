@@ -24,4 +24,4 @@ pylint:
 pep8:
   stage: style
   script:
-  - pycodestyle .
+  - pycodestyle dbrequests.py killer/views.py killer/tests.py
