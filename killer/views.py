@@ -133,7 +133,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     games_with_same_id = GameModel.objects.all().filter(game=request.POST['game'])
-                    if len(games_with_same_id) > 0:
+                    if games_with_same_id:
                         return HttpResponse(status=400)
                     if request.POST['game'] == '':
                         return HttpResponse(status=401)
@@ -148,7 +148,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     user = User.objects.all().filter(user=request.POST['user'])
-                    if len(user) == 0:
+                    if not user:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'game': user[0].game})
             elif request.POST['action'] == 'join_game':
@@ -159,11 +159,11 @@ def bot_request(request):
                 if checker:
                     player = User.objects.all().filter(user=request.POST['user'])
                     game = GameModel.objects.all().filter(game=request.POST['game'])
-                    if len(player) == 0:
+                    if not player:
                         return HttpResponse(status=400)
                     if player[0].game != '':
                         return HttpResponse(status=401)
-                    if len(game) == 0:
+                    if not game:
                         return HttpResponse(status=402)
                     User.objects.all().filter(user=request.POST['user']).update(
                         game=request.POST['game'],
@@ -177,10 +177,10 @@ def bot_request(request):
                 for req in requirements:
                     checker = (checker and req in request.POST.keys())
                 if checker:
-                    if len(GameModel.objects.all().filter(game=request.POST['game'])) == 0:
+                    if not GameModel.objects.all().filter(game=request.POST['game']):
                         return JsonResponse({'error': 'no_such_game'})
                     users = User.objects.all().filter(game=request.POST['game'])
-                    if len(users) == 0:
+                    if not users:
                         return JsonResponse({'error': 'no_such_users'})
                     response = {'error': 'ok'}
                     for i in range(len(users)):
@@ -193,7 +193,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     player = User.objects.all().filter(user=request.POST['user'])
-                    if len(player) == 0:
+                    if not player:
                         return HttpResponse(status=400)
                     if player[0]['game'] != request.POST['game']:
                         return HttpResponse(401)
@@ -210,11 +210,11 @@ def bot_request(request):
                 if checker:
                     player = User.objects.all().filter(
                         user=request.POST['user'])
-                    if len(player) == 0:
+                    if not player:
                         return HttpResponse(status=400)
                     if player[0].game == '':
                         return HttpResponse(status=401)
-                    if len(User.objects.all().filter(user=request.POST['target'])) == 0:
+                    if not User.objects.all().filter(user=request.POST['target']):
                         return HttpResponse(status=228)
                     if player[0].game != User.objects.all().filter(
                             user=request.POST['target'])[0].game:
@@ -229,7 +229,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     user = User.objects.all().filter(user=request.POST['user'])
-                    if len(user) == 0:
+                    if not user:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'target': user[0].target})
             elif request.POST['action'] == 'registration':
@@ -239,7 +239,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     user = User.objects.all().filter(user=request.POST['user'])
-                    if len(user) > 0:
+                    if user:
                         return HttpResponse(status=400)
                     if request.POST['user'] == '':
                         return HttpResponse(status=401)
@@ -274,7 +274,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     player = User.objects.all().filter(user=request.POST['user'])
-                    if len(player) == 0:
+                    if not player:
                         return HttpResponse(status=400)
                     if player[0].game == '':
                         return HttpResponse(status=401)
@@ -289,9 +289,9 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     game = GameModel.objects.all().filter(game=request.POST['game'])
-                    if len(game) == 0:
+                    if not game:
                         return HttpResponse(status=400)
-                    if len(User.objects.all().filter(user=request.POST['user'])) == 0:
+                    if not User.objects.all().filter(user=request.POST['user']):
                         return HttpResponse(status=401)
                     GameModel.objects.all().filter(game=request.POST['game']).update(
                         winner=request.POST['user'])
@@ -303,7 +303,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     game = GameModel.objects.all().filter(game=request.POST['game'])
-                    if len(game) == 0:
+                    if not game:
                         return HttpResponse(status=400)
                     GameModel.objects.all().filter(game=request.POST['game']).update(
                         condition=request.POST['condition'])
@@ -315,7 +315,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     game = GameModel.objects.all().filter(game=request.POST['game'])
-                    if len(game) == 0:
+                    if not game:
                         return JsonResponse({'error': 'no_such_game'})
                     return JsonResponse({'error': 'ok', 'condition': game[0].condition})
             elif request.POST['action'] == 'get_players_condition':
@@ -325,7 +325,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     user = User.objects.all().filter(user=request.POST['user'])
-                    if len(user) == 0:
+                    if not user:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'condition': user[0].condition})
             elif request.POST['action'] == 'change_players_condition':
@@ -335,7 +335,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     user = User.objects.all().filter(user=request.POST['user'])
-                    if len(user) == 0:
+                    if not user:
                         return HttpResponse(status=400)
                     User.objects.all().filter(user=request.POST['user']).update(
                         condition=request.POST['condition'])
@@ -348,9 +348,9 @@ def bot_request(request):
                 if checker:
                     user = User.objects.all().filter(target=request.POST['user'])
                     user1 = User.objects.all().filter(user=request.POST['user'])
-                    if len(user1) == 0:
+                    if not user1:
                         return JsonResponse({'error': 'no_such_user'})
-                    if len(user) == 0:
+                    if not user:
                         return JsonResponse({'error': 'no_such_killer'})
                     return JsonResponse({'error': 'ok', 'killer': user[0].user})
             elif request.POST['action'] == 'get_nickname':
@@ -360,7 +360,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     user = User.objects.all().filter(user=request.POST['user'])
-                    if len(user) == 0:
+                    if not user:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'nickname': user[0].nickname})
             elif request.POST['action'] == 'get_user_identifier':
@@ -370,7 +370,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     user = User.objects.all().filter(user=request.POST['user'])
-                    if len(user) == 0:
+                    if not user:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'user_identifier': user[0].user_identifier})
             elif request.POST['action'] == 'set_user_identifier':
@@ -380,7 +380,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     user = User.objects.all().filter(user=request.POST['user'])
-                    if len(user) == 0:
+                    if not user:
                         return HttpResponse(status=400)
                     User.objects.all().filter(user=request.POST['user']).update(
                         user_identifier=request.POST['user_identifier'])
@@ -392,7 +392,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     user = User.objects.all().filter(user=request.POST['user'])
-                    if len(user) == 0:
+                    if not user:
                         return HttpResponse(status=400)
                     new_kills = user[0].kills + 1
                     User.objects.all().filter(user=request.POST['user']).update(
@@ -405,7 +405,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     user = User.objects.all().filter(user=request.POST['user'])
-                    if len(user) == 0:
+                    if not user:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'kills': str(user[0].kills)})
             elif request.POST['action'] == 'count_wins':
@@ -415,7 +415,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     user = User.objects.all().filter(user=request.POST['user'])
-                    if len(user) == 0:
+                    if not user:
                         return HttpResponse(status=400)
                     new_wins = user[0].wins + 1
                     User.objects.all().filter(user=request.POST['user']).update(
@@ -428,7 +428,7 @@ def bot_request(request):
                     checker = (checker and req in request.POST.keys())
                 if checker:
                     user = User.objects.all().filter(user=request.POST['user'])
-                    if len(user) == 0:
+                    if not user:
                         return JsonResponse({'error': 'no_such_user'})
                     return JsonResponse({'error': 'ok', 'wins': str(user[0].wins)})
     return HttpResponse(status=403)
