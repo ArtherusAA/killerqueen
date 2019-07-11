@@ -4,3 +4,6 @@ killer/__pycache__
 killergame/__pycache__
 .DS_Store
 killer/.DS_Store
+killer/migrations/__pycache__/
+killergame/.DS_Store
+
