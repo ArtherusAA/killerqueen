@@ -7,3 +7,10 @@ There are some problems which can occur while playing. For instance, player can 
 # How can I play Killer with this bot?
 First you press the "start" button to register in the bot and then you are ready. Anyone can create a game and get an invite message, which player needs to send to the bot if he/she wants to join this game. If there are more than 2 players in the game, creator can press start game button, everyone gets targets  and unique codes, which you should give to person who've killed you. Also you can visit scoreboard to see top Killer players.
 # How can I launch this bot myself?
+1) Clone this repository
+2) Install requirements.txt:
+pip install -r requirements.txt
+3) Launch django server using:
+python3 manage.py runserver
+4) Launch the bot using:
+python3 bot.py
