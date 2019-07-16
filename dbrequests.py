@@ -2,7 +2,7 @@ import json
 import requests
 
 
-url = 'http://127.0.0.1:1488/bot_request/'
+url = 'http://127.0.0.1:8000/bot_request/'
 
 
 def get_players(game):
